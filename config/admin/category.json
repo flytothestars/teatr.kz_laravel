@@ -1,0 +1,51 @@
+{
+    "path": "App\\Models\\Specific\\Category",
+    "title": "Категории",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "tabs": ["general", "ru", "kz"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "title": {
+            "type": "text",
+            "name": "Название",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "active": {
+            "type": "checkbox",
+            "name": "Опубликовано",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Не опубликовано<\/span>",
+                "true": "<span class='badge badge-success'>Опубликовано<\/span>"
+            }
+        }
+    }
+}

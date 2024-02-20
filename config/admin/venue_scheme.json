@@ -1,0 +1,60 @@
+{
+    "path": "App\\Models\\Specific\\VenueScheme",
+    "title": "Рассадки",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "with": ["venue"],
+    "tabs": ["general", "ru", "kz"],
+    "_additional_links": [
+        {"title": "<i class='ti-eye grey-color'></i>", "url": "/admin#/scheme/%id%"}
+    ],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "title": {
+            "type": "text",
+            "name": "Название",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "venue_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\Venue",
+                "title": "title",
+                "language": "ru"
+            },
+            "name": "Площадка",
+            "form": true,
+            "attributes": [{"id": "venue", "value": ["title"], "language":  "ru"}],
+            "table": true,
+            "table_filter_select": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        }
+    }
+}

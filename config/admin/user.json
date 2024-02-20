@@ -1,0 +1,99 @@
+{
+  "path": "App\\Models\\General\\User",
+  "title": "Пользователи",
+  "initial_order": ["id", "desc"],
+  "add": false,
+  "edit": true,
+  "delete": false,
+  "with": ["roles"],
+  "permissions": {
+    "create": ["user_create"],
+    "delete": ["user_delete"]
+  },
+  "fields": {
+    "id": {
+      "type": "text",
+      "name": "Id",
+      "form": false,
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true
+    },
+    "email": {
+      "type": "email",
+      "name": "Email",
+      "form": true,
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true,
+      "validation": "required",
+      "tab": "general"
+    },
+    "password": {
+      "type": "password",
+      "name": "Пароль",
+      "form": true,
+      "table": false,
+      "likesearch": true,
+      "validation": "required|min:6",
+      "validation_update": "nullable|min:6",
+      "tab": "general"
+    },
+    "name": {
+      "type": "text",
+      "name": "Имя",
+      "form": true,
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true,
+      "validation": "required",
+      "tab": "general"
+    },
+    "roles": {
+      "type": "select",
+      "select_data": {
+        "type": "model",
+        "title": ["name"],
+        "model": "App\\Models\\General\\Role"
+      },
+      "name": "Роль",
+      "form": false,
+      "attributes": [{"id": "roles","value": ["name"]}],
+      "table": false,
+      "tablesort": true,
+      "tablesearch": true,
+      "multiple": false,
+      "table_filter_select": true,
+      "skipsearch": true,
+      "likesearch": false,
+      "classes": "select2-candidate",
+      "tab": "general"
+    },
+    "blocked": {
+      "type": "checkbox",
+      "name": "Заблокирован",
+      "form": false,
+      "wrapclasses": "col-md-12",
+      "table": false,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": false,
+      "table_show": {
+        "false": "<span class='badge badge-secondary'>Активен</span>",
+        "true": "<span class='badge badge-danger'>Блокирован</span>"
+      }
+    },
+    "created_at": {
+      "type": "text",
+      "name": "Создан",
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true,
+      "format_date": true
+    }
+  }
+}

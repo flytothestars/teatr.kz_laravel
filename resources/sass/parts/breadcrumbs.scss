@@ -1,0 +1,17 @@
+.breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    margin-top: 22px;
+    margin-bottom: 75px;
+    font-size: 12px;
+    > div {
+        margin-left: 22px;
+        &:first-of-type {
+            margin-left: 0;
+        }
+    }
+    color: #000;
+    a {
+        color: #A7A7A7;
+    }
+}

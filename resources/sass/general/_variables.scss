@@ -1,0 +1,43 @@
+
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font: 'Montserrat', sans-serif;
+
+// Bootstrap override
+//$spacer: 5rem;
+$leftsidebarw: 300px;
+
+// Colors
+$color-border: #E6E6E6;
+$color-primary: #F5BF34;
+$color-secondary: #736C90;
+$color-gray: #9F9C92;
+$color-success: #25a76b;
+$color-warning: #e8af03;
+$color-danger: #F55050;
+$color-neutral: #EAE9EE;
+//$color-sidebar: #3B374D;
+$color-sidebar: #2C2C2C;
+$color-light: #F5F5F5;
+
+// Admin
+$color-primary-admin: #000;
+$admin-sidebar-active: #EB5E28;
+$admin-sidebar-bg-logo: #fff;
+$admin-sidebar-bg: #fff;
+
+$seatcolors: (
+        0: #ee9a9a,
+        1: #9870ad,
+        2: #3eb5f1,
+        3: #4a9f66,
+        4: #DE507C,
+        5: #0F4D5F,
+        6: #9F9739,
+        7: #450B1D,
+        8: #A9248F,
+        9: #C54120,
+        10: #000,
+);

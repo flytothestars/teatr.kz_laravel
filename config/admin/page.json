@@ -1,0 +1,100 @@
+{
+    "path": "App\\Models\\General\\Page",
+    "title": "Страницы",
+    "with": [],
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "modal": "modal-xl",
+    "tabs": ["general", "ru", "kz"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "title": {
+            "type": "text",
+            "name": "Название",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "body": {
+            "type": "textarea",
+            "name": "Описание",
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "form": true,
+            "table": false,
+            "quill": false,
+            "classes": "ckeditorcandidate"
+        },
+        "page_group": {
+            "type": "select",
+            "select_data": {
+                "type": "list",
+                "data": [
+                    { "value": "about", "title": "О нас" },
+                    { "value": "purchase", "title": "О Покупке"},
+                    { "value": "partnership", "title": "Сотрудничество"},
+                    { "value": "legal", "title": "Правовые документы"}
+                ]
+            },
+            "name": "Группа",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table_show": {
+                "about": "<span class='badge badge-info'>О нас<\/span>",
+                "purchase": "<span class='badge badge-primary'>О Покупке<\/span>",
+                "partnership": "<span class='badge badge-success'>Сотрудничество<\/span>",
+                "legal": "<span class='badge badge-secondary'>Правовые документы<\/span>"
+            }
+        },
+        "slug": {
+            "type": "text",
+            "name": "ЧПУ",
+            "form": true,
+            "table": true,
+            "validation": "required",
+            "tab": "general",
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "active": {
+            "type": "checkbox",
+            "name": "Опубликовано",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Не опубликовано<\/span>",
+                "true": "<span class='badge badge-success'>Опубликовано<\/span>"
+            }
+        }
+    }
+}

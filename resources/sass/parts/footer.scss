@@ -1,0 +1,79 @@
+.footer {
+    &__top {
+        background: #2B2A29;
+        padding-top: 80px;
+        padding-bottom: 72px;
+        border-bottom: 1px solid #42403D;
+        color: #AAAAA9;
+        a {
+            color: #fff;
+        }
+    }
+    &__bottom {
+        background: #2B2A29;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        color: #fff;
+    }
+    &__menuitem {
+        display: block;
+        padding: 10px 0;
+    }
+    &__social {
+        background: #5F5D5B;
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+    }
+    &__phone {
+        display: block;
+        padding-top: 10px;
+        font-size: 18px;
+    }
+    &__contacts {
+        font-size: 14px;
+        > div {
+            margin-bottom: 18px;
+        }
+    }
+}
+
+
+@media(max-width: 768px) {
+    .footer {
+        &__top {
+            padding-top: 44px;
+            padding-bottom: 40px;
+        }
+        &__bottom {
+            font-size: 14px;
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+        &__phone {
+            font-size: 17px;
+            margin-bottom: 24px;
+        }
+        &__contacts {
+            text-align: center;
+            > div {
+                margin-bottom: 12px;
+            }
+        }
+        &__developer {
+            img {
+                max-width: 158px;
+            }
+        }
+        &__visa {
+            max-width: 44px;
+        }
+        &__mastercard {
+            max-width: 34px;
+        }
+    }
+}

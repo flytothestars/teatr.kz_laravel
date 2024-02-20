@@ -1,0 +1,19 @@
+{
+    "about": "О нас",
+    "default_title": "Teatr.kz - площадка о театральной жизни Казахстана",
+    "default_description": "Teatr.kz - площадка о театральной жизни Казахстана",
+    "general": "Общие",
+    "Hello": "Привет",
+    "Hello!": "Привет!",
+    "If you did not request a password reset, no further action is required.": "Если вы не запрашивали сброс пароля, никаких дальнейших действий не требуется.",
+    "legal": "Правовые документы",
+    "partnership": "Сотрудничество",
+    "purchase": "О покупке",
+    "Regards": "С уважением",
+    "Reset Password": "Сбросить пароль",
+    "Reset Password Notification": "Уведомление о сбросе пароля",
+    "This password reset link will expire in :count minutes.": "Этот линк действителен в течение :count минут",
+    "You are receiving this email because we received a password reset request for your account.": "Вам пришло это письмо, потому что мы получили запрос на сброс пароля для вашей учетной записи.",
+    "something_wrong": "Что-то пошло не так",
+    "success_message": "Операция прошла успешно"
+}

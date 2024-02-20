@@ -1,0 +1,116 @@
+{
+    "path": "App\\Models\\Specific\\Cast",
+    "title": "Артисты",
+    "initial_order": [
+        "name",
+        "asc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "modal": "modal-xl",
+    "tabs": ["general", "ru", "kz"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "name": {
+            "type": "text",
+            "name": "Имя",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "description": {
+            "type": "textarea",
+            "name": "Описание",
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "form": true,
+            "table": false,
+            "quill": true
+        },
+        "actor": {
+            "type": "checkbox",
+            "name": "Актер",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "-",
+                "true": "<span class='badge badge-success'>Да</span>"
+            }
+        },
+        "director": {
+            "type": "checkbox",
+            "name": "Режиссер",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "-",
+                "true": "<span class='badge badge-success'>Да</span>"
+            }
+        },
+        "artist": {
+            "type": "checkbox",
+            "name": "Художник",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "-",
+                "true": "<span class='badge badge-success'>Да</span>"
+            }
+        },
+        "image": {
+            "type": "file",
+            "subtype": "image",
+            "name": "Изображение",
+            "multiple": true,
+            "form": true,
+            "table": false,
+            "wrapclasses": "col-md-12",
+            "validation": "mimes:jpeg,png,jpg,gif"
+        },
+        "active": {
+            "type": "checkbox",
+            "name": "Опубликовано",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Не опубликовано<\/span>",
+                "true": "<span class='badge badge-success'>Опубликовано<\/span>"
+            }
+        }
+    }
+}

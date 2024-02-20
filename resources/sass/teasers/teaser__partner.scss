@@ -1,0 +1,40 @@
+.partner {
+    &.teaser {
+        margin-bottom: 40px;
+        img {
+            @include roundImg(112px);
+            object-fit: contain;
+            margin-right: 70px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+        article {
+            padding-bottom: 40px;
+            border-bottom: 1px solid $color-border;
+        }
+    }
+}
+
+
+@media(max-width: 768px) {
+    .partner {
+        &.teaser {
+            margin-bottom: 24px;
+            img {
+                @include roundImg(100px);
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+            h2 {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+            article {
+                font-size: 13px;
+                padding-bottom: 24px;
+            }
+        }
+    }
+}

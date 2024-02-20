@@ -1,0 +1,41 @@
+.timetable {
+    &.teaser {
+        border-left: 2px solid $color-primary;
+        background: $color-light;
+        padding: 24px;
+        font-size: 15px;
+    }
+
+    &__datetime {
+
+    }
+    &__title {
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    &__venue  {
+        color: $color-gray;
+    }
+}
+
+
+@media(max-width: 768px) {
+    .timetable {
+        &.teaser {
+            padding: 20px;
+            .btn-dark {
+                width: 100%;
+                padding: 14px 20px;
+            }
+        }
+        &__title {
+            margin-bottom: 8px;
+            font-size: 17px;
+        }
+        &__venue  {
+            margin-top: 16px;
+            font-size: 13px;
+        }
+    }
+}

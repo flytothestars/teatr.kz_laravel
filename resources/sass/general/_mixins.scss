@@ -1,0 +1,15 @@
+@mixin roundBtn($size) {
+  width: $size;
+  height: $size;
+  line-height: $size;
+  border-radius: 100%;
+  text-align: center;
+  user-select: none;
+}
+@mixin roundImg($size) {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 100%;
+}

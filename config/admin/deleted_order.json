@@ -1,0 +1,122 @@
+{
+    "path": "App\\Models\\Specific\\Order",
+    "title": "Заказы",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": false,
+    "edit": false,
+    "delete": false,
+    "with": ["timetable","timetable.event"],
+    "tabs": ["general"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "timetable_id": {
+            "name": "Событие",
+            "form": false,
+            "attributes": {"timetable": [{"event": "title"}, "datetime"] },
+            "table": true,
+            "likesearch": false
+        },
+        "name": {
+            "type": "text",
+            "name": "Имя",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrap-classes": "col-md-12"
+        },
+        "email": {
+            "type": "text",
+            "name": "Email",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrap-classes": "col-md-12"
+        },
+        "phone": {
+            "type": "text",
+            "name": "Телефон",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrap-classes": "col-md-12"
+        },
+        "price": {
+            "type": "text",
+            "name": "Сумма",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "format_number": true,
+            "wrap-classes": "col-md-12"
+        },
+        "platform": {
+            "type": "text",
+            "name": "Платформа",
+            "form": false,
+            "table": false,
+            "likesearch": true
+        },
+        "created_at": {
+            "type": "text",
+            "name": "Время",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "format_date": true
+        },
+        "paid": {
+            "type": "checkbox",
+            "name": "Оплачен",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Нет<\/span>",
+                "true": "<span class='badge badge-success'>Да<\/span>"
+            }
+        },
+        "sent": {
+            "type": "checkbox",
+            "name": "Отправлен",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Нет<\/span>",
+                "true": "<span class='badge badge-success'>Да<\/span>"
+            }
+        }
+    }
+}

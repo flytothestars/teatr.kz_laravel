@@ -1,0 +1,77 @@
+.spaceduck-iframe-wrap {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0.7);
+  .spaceduck-iframe-container {
+    width: calc(100% - 30px);
+    max-width: 1200px;
+    height: calc(100% - 30px);
+    margin:15px auto;
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.29);
+    -moz-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.29);
+    box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.29);
+  }
+  .spaceduck-iframe-container iframe {
+    width: 100%;
+    overflow-x: hidden;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    position: relative;
+    height: 100% !important;
+    min-height: 600px;
+  }
+  .spaceduck-iframe-holder {
+    height: 100%;
+    font-size: 0;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+  }
+
+  .spaceduck-header {
+    content: '';
+    /*background: #fff;*/
+    z-index: 902;
+    top:0;
+    width: 100%;
+    /*height: 65px;*/
+    max-width: 100%;
+    display: block;
+    position: absolute;
+  }
+  a#spaceduck-close {
+    display: block;
+    position: absolute;
+    z-index: 950;
+    top: 0;
+    right: 0;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    background: #fff;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    font-weight: bold;
+    font-size: 23px;
+    opacity: 0.5;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    color:#000 !important;
+    text-decoration: none !important;
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+    @media(max-width: 768px) {
+      border-bottom-left-radius: 0;
+      font-size: 21px;
+    }
+  }
+}

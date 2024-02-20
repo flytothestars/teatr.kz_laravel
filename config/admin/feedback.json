@@ -1,0 +1,113 @@
+{
+    "path": "App\\Models\\Specific\\Feedback",
+    "title": "Рецензии",
+    "initial_order": [
+        "date",
+        "asc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "with": ["event"],
+    "modal": "modal-xl",
+    "tabs": ["general", "ru", "kz"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "title": {
+            "type": "text",
+            "name": "Название",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "description": {
+            "type": "textarea",
+            "name": "Описание",
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "form": true,
+            "table": false,
+            "quill": true
+        },
+        "image": {
+            "type": "file",
+            "subtype": "image",
+            "name": "Изображение",
+            "multiple": false,
+            "form": true,
+            "table": false,
+            "wrapclasses": "col-md-12",
+            "validation": "mimes:jpeg,png,jpg,gif"
+        },
+        "date": {
+            "type": "date",
+            "name": "Дата",
+            "tab": ["general"],
+            "validation": "required",
+            "form": true,
+            "table": true
+        },
+        "name": {
+            "type": "text",
+            "name": "Имя",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "tab": ["general"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "event_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\Event",
+                "title": "title",
+                "language": "ru"
+            },
+            "name": "Событие",
+            "form": true,
+            "attributes": [{"id": "event", "value": ["title"], "language":  "ru"}],
+            "table": true,
+            "table_filter_select": false,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "active": {
+            "type": "checkbox",
+            "name": "Опубликовано",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Не опубликовано<\/span>",
+                "true": "<span class='badge badge-success'>Опубликовано<\/span>"
+            }
+        }
+    }
+}

@@ -1,0 +1,156 @@
+#event-page {
+    .event {
+        &__intro {
+            min-height: 600px;
+            position: relative;
+            .shadow {
+                position: absolute;
+                left: 0;
+                top:0;
+                background: rgba(0,0,0,0.4);
+                width: 100%;
+                height: 100%;
+                &__content {
+                    position: absolute;
+                    width: 100%;
+                    bottom: 64px;
+                    left: 0;
+                    color: #fff;
+                    a {
+                        color: #fff;
+                    }
+                    h1 {
+                        margin-top: 8px;
+                        margin-bottom: 40px;
+                    }
+                }
+                &__venue {
+                    font-size: 15px;
+                    margin-bottom: 70px;
+                }
+                &__category {
+                    opacity: 0.6;
+                    font-size: 14px;
+                }
+            }
+            img {
+                width: 100%;
+                height: 600px;
+                object-fit: cover;
+                object-position: top;
+            }
+        }
+        &__description {
+            margin-bottom: 80px;
+            h2 {
+                margin-top: 80px;
+                margin-bottom: 40px;
+                font-size: 26px;
+            }
+        }
+        &__gallery {
+            margin-bottom: 80px;
+        }
+        &__schedule {
+            margin-top: 80px;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            border-top: 1px solid #E0E0E0;
+            h2 {
+                margin-bottom: 32px;
+            }
+        }
+    }
+}
+
+.parallax-window {
+    min-height: 600px;
+    background: transparent;
+}
+
+#masonry-grid {
+    opacity: 0;
+    &.initiated {
+        opacity: 1;
+    }
+    .grid-item {
+        width: calc(33.33% - 20px);
+        margin-bottom: 30px;
+    }
+}
+.recently-seen {
+    padding-top: 80px;
+    padding-bottom: 100px;
+    h2 {
+        margin-bottom: 24px;
+    }
+}
+
+
+
+@media(max-width: 768px) {
+    #event-page {
+        .event {
+            &__intro {
+                min-height: 290px;
+                .shadow {
+                    &__content {
+                        bottom: 0;
+                        h1 {
+                            margin-bottom: 24px;
+                        }
+                    }
+                    &__venue {
+                        margin-bottom: 0;
+                        font-size: 13px;
+                        padding-left: 18px;
+                    }
+                    &__category {
+                        font-size: 13px;
+                    }
+                    .btn-themed {
+                        width: calc(100% - 40px);
+                        left: 20px;
+                        position: absolute;
+                        bottom: -70px;
+                    }
+                }
+            }
+            &__description {
+                margin-top: 120px;
+                margin-bottom: 30px;
+                h2 {
+                    font-size: 19px;
+                    margin-bottom: 24px;
+                }
+            }
+            &__gallery {
+                padding-top: 32px;
+                border: 1px solid #E0E0E0;
+                margin-bottom: 40px;
+            }
+            &__schedule {
+                margin-top: 40px;
+                padding-top: 38px;
+                padding-bottom: 44px;
+            }
+        }
+    }
+    #masonry-grid {
+        .grid-item {
+            width: calc(50% - 10px);
+            margin-bottom: 20px;
+        }
+    }
+    .recently-seen {
+        padding-top: 44px;
+        padding-bottom: 44px;
+    }
+    .ya-share2__list.ya-share2__list_direction_vertical > .ya-share2__item {
+        display: inline-block !important;
+        margin: 4px 8px 4px 0 !important;
+    }
+    .ya-share2__container_mobile .ya-share2__badge {
+        border-radius: 0 !important;
+    }
+}

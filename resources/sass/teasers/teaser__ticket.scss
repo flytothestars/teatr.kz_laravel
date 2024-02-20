@@ -1,0 +1,29 @@
+.teaser.ticket {
+    position: relative;
+    padding: 22px 40px;
+    background: #F8F8F8;
+    border-left: 1px solid $color-primary;
+    opacity: 0.5;
+    &.paid {
+        opacity: 1;
+    }
+    .tickets-svg {
+        width: 24px;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+
+@media(max-width: 768px) {
+    .teaser.ticket {
+        padding: 17px 20px;
+        .ticket__link {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+    }
+}

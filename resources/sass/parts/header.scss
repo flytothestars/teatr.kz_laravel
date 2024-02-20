@@ -1,0 +1,92 @@
+.header {
+    height: 100px;
+    border-bottom: 1px solid $color-border;
+    .btn-plain {
+        font-size: 15px;
+    }
+    .city-select-wrapper {
+        button {
+            border: none;
+            background: transparent;
+        }
+        .dropdown-menu {
+            border-radius: 0;
+        }
+        .city-select {
+            &:hover, &:focus, &.active {
+                color: #000;
+                background-color: $color-light;
+            }
+        }
+    }
+    .dropdown {
+        .profile-item {
+            &:hover, &:focus, &.active {
+                color: #000;
+                background-color: $color-light;
+            }
+        }
+    }
+    &__logo {
+        img {
+            max-width: 190px;
+        }
+    }
+    &__link {
+        text-transform: uppercase;
+        font-size: 17px;
+        padding: 10px 18px;
+        display: inline-block;
+        &.active {
+            color: $color-primary;
+        }
+    }
+    #city-select {
+        border: none;
+        font-size: 17px;
+        outline: none;
+        //padding: 10px;
+        //max-width: 110px;
+    }
+    &.dark {
+        position: absolute;
+        z-index: 4;
+        width: 100%;
+        border-bottom: none;
+        a {
+            color: #fff;
+        }
+        a.btn-plain {
+            background: transparent;
+        }
+        .city-select-wrapper, .profile-dropdown {
+            button {
+                background: transparent;
+                color: #fff;
+            }
+            .dropdown-menu a {
+                color: #000;
+            }
+            .dropdown-item.profile-item {
+                color: #000;
+            }
+        }
+
+    }
+}
+
+
+@media(max-width: 768px) {
+    .header {
+        height: 64px;
+        &__logo {
+            display: block;
+            img {
+                max-width: 100%;
+            }
+        }
+        .mob-menu-toggler {
+            padding: 10px 10px 10px 0;
+        }
+    }
+}

@@ -1,0 +1,55 @@
+.feedback {
+    &.teaser {
+        width: 100%;
+        background: #fff;
+        padding: 32px 40px;
+        .feedback {
+            &__title, &__username {
+                font-size: 18px;
+                font-weight: 600;
+            }
+            &__body {
+                font-size: 15px;
+                color: #525252;
+                margin-top: 24px;
+                margin-bottom: 36px;
+            }
+            &__img {
+                width: 62px;
+                height: 62px;
+                border-radius: 100%;
+                object-fit: cover;
+                object-position: center;
+                margin-right: 14px;
+            }
+            &__date {
+                color: #BCBCBC;
+                font-size: 14px;
+            }
+        }
+
+    }
+}
+
+
+
+@media(max-width: 768px) {
+    .feedback {
+        &.teaser {
+            padding: 24px;
+            .feedback {
+                &__title, &__username {
+                    font-size: 15px;
+                }
+                &__body {
+                    font-size: 13px;
+                    margin-top: 16px;
+                    margin-bottom: 32px;
+                }
+                &__date {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,99 @@
+.event {
+    &.teaser {
+        position: relative;
+        border: 1px solid #E1E1E1;
+        border-radius: 2px;
+        display: flex;
+        flex-direction: column;
+    }
+    &__img {
+        width: 100%;
+    }
+    &__content {
+        padding: 18px 24px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    &__category {
+        position: absolute;
+        top: 18px;
+        left: 24px;
+        width: calc(100% - 24px);
+        color: #fff;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+    &__topinfo {
+        flex: 1 0 auto;
+    }
+    &__datetime {
+        font-size: 14px;
+    }
+    &__title {
+        margin-top: 16px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    &__venue  {
+        flex: 0 1 auto;
+        padding-top: 40px;
+        a {
+            color: $color-gray;
+            font-size: 15px;
+        }
+    }
+    &.teaser.big {
+        .event {
+            &__content {
+                position: absolute;
+                bottom: 0;
+                height: auto;
+                left: 0;
+                width: 100%;
+                color: #fff;
+                a {
+                    color: #fff;
+                }
+            }
+            &__datetime, &__venue {
+                opacity: 0.5;
+            }
+        }
+        > a {
+            height: 100%;
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+
+@media(max-width: 768px) {
+    .event {
+        &.teaser {
+            &.big {
+                .event {
+                    &__content {
+                        position: inherit;
+                        color: #000;
+                        a {
+                            color: #000;
+                        }
+                    }
+                }
+            }
+        }
+        &__content {
+            padding: 16px 18px 20px 18px;
+        }
+        &__venue {
+            padding-top: 30px;
+        }
+        &__title {
+            font-size: 17px;
+        }
+    }
+}

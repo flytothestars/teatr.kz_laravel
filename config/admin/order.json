@@ -1,0 +1,143 @@
+{
+    "path": "App\\Models\\Specific\\Order",
+    "title": "Заказы",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": false,
+    "edit": true,
+    "delete": true,
+    "with": ["timetable","timetable.event"],
+    "tabs": ["general"],
+    "additional_links": [
+        {"title": "<i class='ti-printer grey-color' data-toggle='tooltip' title='Печать билетов'></i>", "url": "/order/%id%/%hash%/pdf"},
+        {"title": "<i class='ti-email grey-color' data-toggle='tooltip' title='Отправить на почту'></i>", "url": "/admin/order/%id%/ticket/send"}
+    ],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "event_id": {
+            "type": "text",
+            "name": "Событие",
+            "form": false,
+            "attributes": [{"id": "timetable", "value": [{"event": "title"}] }],
+            "idattribute": "event_id",
+            "skipsearch": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "format_date": true,
+            "likesearch": false
+        },
+        "timetable_id": {
+            "type": "text",
+            "name": "Сеанс",
+            "form": false,
+            "attributes": [{"id": "timetable", "value": ["datetime"] }],
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "format_date": true,
+            "likesearch": false
+        },
+        "name": {
+            "type": "text",
+            "name": "Имя",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrap-classes": "col-md-12"
+        },
+        "email": {
+            "type": "text",
+            "name": "Email",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrap-classes": "col-md-12"
+        },
+        "phone": {
+            "type": "text",
+            "name": "Телефон",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrap-classes": "col-md-12"
+        },
+        "price": {
+            "type": "text",
+            "name": "Сумма",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "format_number": true,
+            "wrap-classes": "col-md-12"
+        },
+        "platform": {
+            "type": "text",
+            "name": "Платформа",
+            "form": false,
+            "table": false,
+            "likesearch": true
+        },
+        "created_at": {
+            "type": "text",
+            "name": "Время",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "format_date": true
+        },
+        "paid": {
+            "type": "checkbox",
+            "name": "Оплачен",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Нет<\/span>",
+                "true": "<span class='badge badge-success'>Да<\/span>"
+            }
+        },
+        "sent": {
+            "type": "checkbox",
+            "name": "Отправлен",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Нет<\/span>",
+                "true": "<span class='badge badge-success'>Да<\/span>"
+            }
+        }
+    }
+}

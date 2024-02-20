@@ -1,0 +1,116 @@
+//.body-widget {
+//    main {
+//        padding-bottom: 0;
+//    }
+//}
+.widget-part {
+  max-width: 1200px;
+  height: 100vh;
+}
+.right-content {
+  background: #fff;
+  height: 100%;
+  display: flex;
+  max-width: min(900px, calc(100vw - 300px));
+  flex-direction: column;
+  .timetable-btn {
+    display: inline-block;
+    text-align: center;
+    min-width: 270px;
+    padding: 13px;
+    margin-bottom: 13px;
+    color: #3B374D;
+    border: 2px solid #3B374D;
+    border-radius: 10px;
+    font-weight: bold;
+    &:hover {
+      background: #3B374D;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+  //@media(min-width: 768px) {
+  //  max-width: 390px;
+  //}
+  //@media(min-width: 992px) {
+  //  max-width: 630px;
+  //}
+  //@media(min-width: 1200px) {
+  //  max-width: 810px;
+  //}
+  .content-part {
+    padding: 12px 38px;
+    height: 100%;
+    .venue-wrapper {
+      background: #fff;
+      -ms-overflow-style: none;  /* Internet Explorer 10+ */
+      scrollbar-width: none;  /* Firefox */
+      &::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+      }
+    }
+    .plus-btn, .minus-btn {
+      display: inline-block;
+      border: 2px solid #3B374D;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      margin: 0 10px;
+      color: #3B374D;
+      font-size: 18px;
+      user-select: none;
+    }
+  }
+  .countdown {
+    background: $color-primary;
+    color: #fff;
+    font-size: 19px;
+    padding: 6px 13px;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  .label-ch {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .note-ch {
+    color: #878787;
+    font-size: 14px;
+  }
+}
+
+
+@media(max-width: 768px) {
+  .right-content {
+    max-width: none;
+    .content-part {
+      padding: 12px 12px;
+    }
+    .venue-wrapper {
+      padding-bottom: 120%;
+    }
+    .note-ch {
+      font-size: 12px;
+    }
+    h1 {
+      font-size: 19px;
+    }
+    .countdown {
+      font-size: 17px;
+      padding: 4px 12px;
+      border-radius: 8px;
+    }
+    .timetable-btn {
+      padding: 9px;
+    }
+  }
+}
+
+body.iframe {
+  background: #fff;
+}

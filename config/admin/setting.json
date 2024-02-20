@@ -1,0 +1,47 @@
+{
+  "path": "App\\Models\\General\\Setting",
+  "title": "Настройки",
+  "with": [],
+  "initial_order": ["id", "desc"],
+  "add": true,
+  "edit": true,
+  "delete": true,
+  "tabs": ["general", "ru", "kz"],
+  "clearcache": ["settings"],
+  "fields": {
+    "description": {
+      "type": "textarea",
+      "name": "Описание",
+      "form": true,
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true,
+      "rows": 2,
+      "validation": "nullable"
+    },
+    "code": {
+      "type": "text",
+      "name": "Код",
+      "form": true,
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true,
+      "validation": "nullable"
+    },
+    "body": {
+      "type": "textarea",
+      "name": "Содержание",
+      "form": true,
+      "table": true,
+      "tablesort": true,
+      "tablesearch": true,
+      "likesearch": true,
+      "validation": "required",
+      "rows": 2,
+      "languages": ["ru", "kz"],
+      "tab": ["ru", "kz"]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.modal {
+    .modal-body {
+        padding: 36px;
+        .close {
+            position: absolute;
+            padding: 25px;
+            z-index: 2;
+            top: 0;
+            right: 0;
+        }
+        .login-popup__form {
+            max-width: 295px;
+        }
+    }
+}

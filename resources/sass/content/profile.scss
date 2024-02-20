@@ -1,0 +1,46 @@
+.profile-submenu {
+    border-bottom: 1px solid $color-border;
+    margin-bottom: 55px;
+    a {
+        display: inline-block;
+        margin-left: 16px;
+        margin-right: 16px;
+        padding-bottom: 18px;
+        border-bottom: 2px solid transparent;
+        &:first-of-type {
+            margin-left: 0;
+        }
+        &:last-of-type {
+            margin-right: 0;
+        }
+        &.active, &:hover {
+            text-decoration: none;
+            color: $color-primary;
+            border-bottom: 2px solid $color-primary;
+        }
+    }
+}
+.profile.page {
+    h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+
+    }
+}
+
+
+
+@media(max-width: 768px) {
+    .profile-submenu {
+        margin-bottom: 37px;
+        a {
+            padding-bottom: 11px;
+        }
+    }
+    .profile.page {
+        h2 {
+            font-size: 13px;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+body {
+  font-family: 'Lucida';
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  moz-osx-font-smoothing: grayscale;
+  webkit-font-smoothing: antialiased;
+}
+
+[v-cloak] { display: none; }
+
+.d-none-soft {
+  display: none;
+}
+.radio-wrapper {
+  label {
+    display: inline-block;
+  }
+}
+.text-underlined {
+  text-decoration: underline;
+}
+.pointer {
+  cursor: pointer;
+}

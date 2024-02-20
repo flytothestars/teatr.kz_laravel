@@ -1,0 +1,33 @@
+.static-page, .news-page {
+    article {
+        img {
+            max-width: 100%;
+        }
+        p {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: #606060;
+        }
+    }
+    &__leftmenu {
+        h2 {
+            font-size: 14px;
+            color: #D4D4D4;
+            text-transform: uppercase;
+        }
+        a {
+            font-size: 15px;
+            padding: 5px 0;
+            &.active {
+                color: $color-primary;
+            }
+        }
+        .news.teaser .news__date {
+            margin-top: 5px;
+        }
+    }
+    &__menublock {
+        margin-bottom: 40px;
+    }
+}

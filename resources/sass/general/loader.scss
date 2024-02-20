@@ -1,0 +1,54 @@
+@import "variables";
+
+.pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.pace-inactive {
+    display: none;
+}
+
+.pace .pace-progress {
+    background: $color-primary;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 100%;
+    width: 100%;
+    height: 2px;
+}
+.vue-loader {
+    display: none;
+    width: 64px;
+    height: 64px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10000;
+    margin-left: -32px;
+    margin-top: -32px;
+}
+.vue-loader:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 3px solid $color-primary;
+    border-color: $color-primary transparent $color-primary transparent;
+    animation: lds-dual-ring 1s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

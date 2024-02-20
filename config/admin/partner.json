@@ -1,0 +1,57 @@
+{
+    "path": "App\\Models\\Specific\\Partner",
+    "title": "Партнеры",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "with": [],
+    "tabs": ["general", "ru", "kz"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "title": {
+            "type": "textarea",
+            "name": "Название",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12",
+            "rows": 2
+        },
+        "description": {
+            "type": "textarea",
+            "name": "Описание",
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "form": true,
+            "table": false,
+            "quill": true
+        },
+        "image": {
+            "type": "file",
+            "subtype": "image",
+            "name": "Изображение",
+            "multiple": false,
+            "form": true,
+            "table": false,
+            "wrapclasses": "col-md-12",
+            "validation": "mimes:jpeg,png,jpg,gif"
+        }
+    }
+}

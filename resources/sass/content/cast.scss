@@ -1,0 +1,78 @@
+.cast {
+    &.page {
+        h2 {
+            margin-bottom: 24px;
+        }
+        .cast {
+            &__intro {
+                padding-bottom: 80px;
+                border-bottom: 1px solid $color-border;
+                .cast__image {
+                    background: #fff;
+                    @include roundImg(300px);
+                    overflow: hidden;
+                    //border: 1px solid $color-border;
+                    display: inline-block;
+                    margin-right: 75px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+            &__gallery {
+                margin-top: 72px;
+                padding-bottom: 50px;
+            }
+            &__events {
+                border-top: 1px solid $color-border;
+                padding-bottom: 80px;
+                padding-top: 80px;
+            }
+            &__schedule {
+                border-top: 1px solid $color-border;
+                padding-bottom: 80px;
+                padding-top: 80px;
+                .timetable.teaser {
+                    margin-bottom: 24px;
+                }
+            }
+        }
+        .recently-seen {
+            border-top: 1px solid $color-border;
+        }
+    }
+}
+//.body-venue {
+//    main {
+//        padding-bottom: 0;
+//    }
+//}
+
+
+@media(max-width: 768px) {
+    .cast {
+        &.page {
+            .cast {
+                &__intro {
+                    padding-bottom: 40px;
+                    .cast__image {
+                        @include roundImg(175px);
+                    }
+                }
+                &__gallery {
+                    margin-top: 32px;
+                    padding-bottom: 32px;
+                }
+                &__events {
+
+                }
+                &__schedule {
+                    padding-bottom: 44px;
+                    padding-top: 36px;
+                }
+            }
+        }
+    }
+}

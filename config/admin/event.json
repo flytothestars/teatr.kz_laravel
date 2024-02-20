@@ -1,0 +1,143 @@
+{
+    "path": "App\\Models\\Specific\\Event",
+    "title": "События",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "modal": "modal-xl",
+    "tabs": ["general", "ru", "kz"],
+    "with": ["category", "ticketDesign", "cast"],
+    "additional_links": [
+        {"title": "<i class='ti-eye grey-color' data-toggle='tooltip' title='На страницу события'></i>", "url": "/widget#/%id%"},
+        {"title": "<i class='ti-game spaceduck-widget grey-color' data-event-id='%id%' data-toggle='tooltip' title='Запустить виджет'></i>"},
+        {"title": "<i class='ti-shopping-cart grey-color' data-toggle='tooltip' title='Список продаж'></i>", "url": "/admin/report/sales/excel?event_ids=%id%"}
+    ],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "title": {
+            "type": "text",
+            "name": "Название",
+            "form": true,
+            "table": true,
+            "tablesort": false,
+            "tablesearch": true,
+            "likesearch": true,
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "validation": "required",
+            "wrapclasses": "col-md-12"
+        },
+        "description": {
+            "type": "textarea",
+            "name": "Описание",
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "form": true,
+            "table": false,
+            "quill": true
+        },
+        "image": {
+            "type": "file",
+            "subtype": "image",
+            "name": "Изображение",
+            "multiple": true,
+            "form": true,
+            "table": false,
+            "wrapclasses": "col-md-12",
+            "validation": "mimes:jpeg,png,jpg,gif"
+        },
+        "category_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\Category",
+                "title": "title",
+                "language": "ru"
+            },
+            "name": "Категория",
+            "form": true,
+            "attributes": [{"id": "category", "value": ["title"], "language":  "ru"}],
+            "table": true,
+            "table_filter_select": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "cast": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\Cast",
+                "title": "name",
+                "language": "ru"
+            },
+            "name": "В ролях",
+            "multiple": true,
+            "form": true,
+            "attributes": [{"id": "cast", "value": ["name"], "language":  "ru"}],
+            "table": false,
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "ticket_design_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\TicketDesign",
+                "title": "title"
+            },
+            "name": "Шаблон билета",
+            "form": true,
+            "attributes": [{"id": "ticket_design", "value": ["title"]}],
+            "table": true,
+            "table_filter_select": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "duration": {
+            "type": "text",
+            "name": "Продолжительность (в мин)",
+            "form": true,
+            "table": false,
+            "validation": "numeric|min:0|nullable",
+            "wrapclasses": "col-md-12"
+        },
+        "active": {
+            "type": "checkbox",
+            "name": "Опубликовано",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Не опубликовано<\/span>",
+                "true": "<span class='badge badge-success'>Опубликовано<\/span>"
+            }
+        }
+    }
+}

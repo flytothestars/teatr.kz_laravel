@@ -1,0 +1,23 @@
+.news {
+    &.teaser {
+        .news {
+            &__date {
+                color: #BABABA;
+                margin-top: 24px;
+            }
+        }
+    }
+}
+
+
+@media(max-width: 768px) {
+    .news {
+        &.teaser {
+            .news {
+                &__date {
+                    margin-top: 18px;
+                }
+            }
+        }
+    }
+}

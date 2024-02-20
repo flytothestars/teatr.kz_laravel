@@ -1,0 +1,155 @@
+{
+    "path": "App\\Models\\Specific\\Timetable",
+    "title": "Сеансы",
+    "initial_order": [
+        "id",
+        "desc"
+    ],
+    "add": true,
+    "edit": true,
+    "delete": true,
+    "modal": "modal-xl",
+    "tabs": ["general", "ru", "kz"],
+    "additional_links": [
+        {"title": "<i class='ti-eye grey-color' data-toggle='tooltip' title='На страницу сеанса'></i>", "url": "/widget#/%event_id%/%id%"},
+        {"title": "<i class='ti-game spaceduck-widget grey-color' data-event-id='%event_id%' data-timetable-id='%id%' data-toggle='tooltip' title='Запустить виджет'></i>"},
+        {"title": "<i class='ti-ticket grey-color' data-toggle='tooltip' title='Проставить цены'></i>", "url": "/admin#/timetable/%id%"},
+        {"title": "<i class='ti-shopping-cart grey-color' data-toggle='tooltip' title='Список продаж'></i>", "url": "/admin/report/sales/excel?timetable_ids=%id%"}
+    ],
+    "with": ["event", "venue", "scheme"],
+    "fields": {
+        "id": {
+            "type": "text",
+            "name": "Id",
+            "form": false,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true
+        },
+        "note": {
+            "type": "textarea",
+            "name": "Описание",
+            "languages": ["ru", "kz"],
+            "tab": ["ru", "kz"],
+            "form": true,
+            "table": false,
+            "quill": true,
+            "classes": "__ckeditorcandidate"
+        },
+        "datetime": {
+            "type": "datetime",
+            "name": "Время проведения",
+            "tab": ["general"],
+            "validation": "required",
+            "form": true,
+            "tablesort": true,
+            "table": true
+        },
+        "event_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\Event",
+                "title": "title",
+                "language": "ru"
+            },
+            "name": "Событие",
+            "form": true,
+            "attributes": [{"id": "event", "value": ["title"], "language":  "ru"}],
+            "table": true,
+            "table_filter_select": false,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "venue_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\Venue",
+                "title": "title",
+                "language": "ru"
+            },
+            "name": "Площадка",
+            "form": false,
+            "attributes": [{"id": "venue", "value": ["title"], "language":  "ru"}],
+            "table": true,
+            "table_filter_select": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "classes": "select2-candidate",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "venue_scheme_id": {
+            "type": "select",
+            "select_data": {
+                "type": "model",
+                "model": "App\\Models\\Specific\\VenueScheme",
+                "title": "title",
+                "language": "ru"
+            },
+            "name": "Рассадка",
+            "form": false,
+            "attributes": [{"id": "scheme", "value": ["title"], "language":  "ru"}],
+            "table": true,
+            "table_filter_select": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "validation": "required",
+            "wrapclasses": "col-md-12",
+            "tab": "general"
+        },
+        "type": {
+            "type": "select",
+            "select_data": {
+                "type": "list",
+                "data": [
+                    {
+                        "value": "sections",
+                        "title": "По секциям"
+                    },
+                    {
+                        "value": "pricegroups",
+                        "title": "По ценовым группам"
+                    }
+                ]
+            },
+            "name": "Тип",
+            "form": true,
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table_show": {
+                "sections": "<span class='badge badge-info'>По секциям<\/span>",
+                "pricegroups": "<span class='badge badge-primary'>По ценовым группам<\/span>"
+            }
+        },
+        "active": {
+            "type": "checkbox",
+            "name": "Опубликовано",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Не опубликовано<\/span>",
+                "true": "<span class='badge badge-success'>Опубликовано<\/span>"
+            }
+        }
+    }
+}

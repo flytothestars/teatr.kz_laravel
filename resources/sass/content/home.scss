@@ -1,0 +1,151 @@
+.section {
+    &__homeevents {
+        margin-top: 48px;
+        padding-bottom: 80px;
+        .filter-a {
+            background: $color-light;
+            padding: 9px 12px;
+            margin-left: 10px;
+            display: inline-block;
+            cursor: pointer;
+            max-width: 160px;
+            height: 100%;
+            outline: none;
+            border: none;
+            min-width: 40px;
+            &:first-child {
+                margin-left: 0;
+            }
+            &.active, &:hover {
+                background: $color-primary;
+                color: #fff;
+                fill: #fff;
+                text-decoration: none;
+            }
+        }
+        .select-wrapper {
+            margin-left: 10px;
+        }
+    }
+    &__hometheatres {
+        background: $color-light;
+        padding-top: 80px;
+        padding-bottom: 80px;
+        border-bottom: 1px solid $color-border;
+        .venues-swiper {
+            margin-top: 48px;
+            .swiper-wrapper .swiper-slide {
+                align-items: start;
+            }
+        }
+    }
+    &__homefeedbacks {
+        background: $color-light;
+        padding-top: 80px;
+        padding-bottom: 80px;
+        .feedbacks-swiper {
+            margin-top: 48px;
+        }
+    }
+    &__homesubscribe {
+        background: #434241;
+        padding: 37px 0;
+        color: #fff;
+        font-size: 22px;
+        input {
+            background: #5F5D5B;
+            border-radius: 2px;
+            height: 54px;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: #BCBCBC;
+                opacity: 1; /* Firefox */
+            }
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: #BCBCBC;
+            }
+            &::-ms-input-placeholder { /* Microsoft Edge */
+                color: #BCBCBC;
+            }
+        }
+        .btn-themed {
+            height: 54px;
+            font-size: 14px;
+            text-transform: uppercase;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+    }
+    &__homenews {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        .news-wrapper {
+            margin-top: 48px;
+            .col-mb {
+                margin-bottom: 48px;
+            }
+        }
+    }
+}
+
+@media(max-width: 768px) {
+    .section {
+        &__homeevents {
+            padding-bottom: 44px;
+            .select-wrapper {
+                display: inline-block;
+            }
+            .btn-loadmore {
+                display: block;
+                padding: 14px 30px;
+                font-size: 13px;
+            }
+        }
+        &__homesubscribe {
+            font-size: 17px;
+            .btn-themed {
+                width: 100%;
+                display: block;
+                margin-top: 12px;
+                height: 50px;
+            }
+            input {
+                height: 50px;
+            }
+        }
+        &__hometheatres {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            h2 {
+                margin-bottom: 0;
+            }
+        }
+        &__homefeedbacks {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            .feedbacks-swiper {
+                margin-top: 32px;
+            }
+            h2 {
+                margin-bottom: 0;
+            }
+        }
+        &__homenews {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            .news-wrapper {
+                margin-top: 32px;
+                .col-mb {
+                    margin-bottom: 36px;
+                }
+            }
+        }
+    }
+    .home__filter_menu {
+        white-space: nowrap;
+        overflow-x: scroll;
+    }
+}

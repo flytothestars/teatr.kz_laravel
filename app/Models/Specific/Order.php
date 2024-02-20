@@ -21,6 +21,7 @@ class Order extends Model {
     protected $fillable = [
         'timetable_id',
         'api',
+        'articul',
         'user_id',
         'name',
         'email',

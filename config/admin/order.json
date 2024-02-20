@@ -15,9 +15,9 @@
         {"title": "<i class='ti-email grey-color' data-toggle='tooltip' title='Отправить на почту'></i>", "url": "/admin/order/%id%/ticket/send"}
     ],
     "fields": {
-        "id": {
+        "articul": {
             "type": "text",
-            "name": "Id",
+            "name": "Артикул",
             "form": false,
             "table": true,
             "tablesort": true,

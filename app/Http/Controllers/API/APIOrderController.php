@@ -44,8 +44,9 @@ class APIOrderController extends Controller {
         }
 
         $user = $request->user('api');
-
+        
         $order = Order::create([
+            'articul'      => $this->generateRandomArticul(),
             'timetable_id' => $request->timetable_id,
             'user_id'      => $user ? $user->id : null,
             'api'          => $timetable->api,
@@ -75,9 +76,19 @@ class APIOrderController extends Controller {
         ]);
     }
 
-
-
-
+    function generateRandomArticul($length = 8)
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters) - 1;
+        
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength)];
+        }
+        
+        return $randomString;
+    }
+    
 
     public function fillOrder(OrderFillRequest $request, $id, $hash) {
 
@@ -123,9 +134,6 @@ class APIOrderController extends Controller {
 
         return response()->json(['success' => 0]);
     }
-
-
-
 
     public function cancelOrder(Request $request, $id, $hash) {
         $order = Order::where('id',$id)

@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="col-auto" v-if="config.add || config.additional_header_links">
-                    <a tabindex="#" v-if="config.add && canAdd" class="btn btn-info btn-themed btn-fill" @click="modelAdd">Добавить</a>
+                    <a tabindex="#" v-if="config.add" class="btn btn-info btn-themed btn-fill" @click="modelAdd">Добавить</a>
                     <a tabindex="#"  @click="modelExcel" v-if="config.excel" data-toggle="tooltip" title="" class="btn btn-sm btn-secondary text-white ml-2" data-original-title="Выгрузить в excel">
                         <i class="ti-save-alt"></i>
                     </a>
@@ -143,7 +143,7 @@
                             <a v-if="config.duplicate && canAdd" data-toggle="tooltip" title="Дублировать" :data-id ="object.id" @click="modelDuplicate(object.id,ind)" class="model-duplicate btn hover-info">
                                 <i class="ti-layers"></i>
                             </a>
-                            <a v-if="config.delete && canDelete" data-toggle="tooltip" title="Удалить" :data-id="object.id" @click="modelDelete(object.id,ind)" class="model-delete btn hover-red">
+                            <a v-if="config.delete" data-toggle="tooltip" title="Удалить" :data-id="object.id" @click="modelDelete(object.id,ind)" class="model-delete btn hover-red">
                                 <i class="ti-trash"></i>
                             </a>
                         </td>

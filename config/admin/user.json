@@ -2,9 +2,9 @@
   "path": "App\\Models\\General\\User",
   "title": "Пользователи",
   "initial_order": ["id", "desc"],
-  "add": false,
+  "add": true,
   "edit": true,
-  "delete": false,
+  "delete": true,
   "with": ["roles"],
   "permissions": {
     "create": ["user_create"],
@@ -60,7 +60,7 @@
         "model": "App\\Models\\General\\Role"
       },
       "name": "Роль",
-      "form": false,
+      "form": true,
       "attributes": [{"id": "roles","value": ["name"]}],
       "table": false,
       "tablesort": true,

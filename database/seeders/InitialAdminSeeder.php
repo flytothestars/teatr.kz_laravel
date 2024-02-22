@@ -36,8 +36,22 @@ class InitialAdminSeeder extends Seeder
             'updated_at' => new \DateTime(),
         ]);
 
+        DB::table('roles')->insert([
+            'name' => 'casher',
+            'guard_name' => 'web',
+            'created_at' => new \DateTime(),
+            'updated_at' => new \DateTime(),
+        ]);
+
         DB::table('permissions')->insert([
             'name' => 'admin_panel',
+            'guard_name' => 'web',
+            'created_at' => new \DateTime(),
+            'updated_at' => new \DateTime(),
+        ]);
+
+        DB::table('permissions')->insert([
+            'name' => 'casher_panel',
             'guard_name' => 'web',
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
@@ -46,6 +60,11 @@ class InitialAdminSeeder extends Seeder
         DB::table('role_has_permissions')->insert([
             'permission_id' => 1,
             'role_id' => 1,
+        ]);
+
+        DB::table('role_has_permissions')->insert([
+            'permission_id' => 2,
+            'role_id' => 3,
         ]);
 
         DB::table('model_has_roles')->insert([

@@ -41,7 +41,11 @@ class LoginController extends Controller
 
     protected function redirectTo() {
         $user = Auth::user();
+        // dd($user);
         if($user->can('admin_panel')) {
+            return '/admin';
+        }
+        else if($user->can('casher_panel')) {
             return '/admin';
         }
         return $this->redirectTo;

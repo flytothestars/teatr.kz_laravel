@@ -148,8 +148,10 @@ class EloquentController extends Controller
         EloquentHandler::checkPermissions($model_config,"create");
         if(method_exists($class_name,'customCreate')) {
             $obj = $class_name::customCreate($request);
+            $obj->assignRole($request->roles);
         } else {
             $obj = $class_name::create($request->all());
+            $obj->assignRole($request->roles);
         }
         $this->eloquentCheckImages($obj, $request);
         $this->clearCaches($model_config);
@@ -177,11 +179,14 @@ class EloquentController extends Controller
         $model_config = EloquentHandler::getModelConfig($model);
         $class_name = $model_config["path"];
         $obj = $class_name::findOrFail($id);
+
         EloquentHandler::checkPermissions($model_config,"update",$obj);
         if(method_exists($obj,'customUpdate')) {
             $obj->customUpdate($request);
+            $obj->syncRoles($request->roles);
         } else {
             $obj->update($request->all());
+            $obj->syncRoles($request->roles);
         }
         $this->eloquentCheckImages($obj, $request);
         $this->clearCaches($model_config);

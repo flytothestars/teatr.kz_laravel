@@ -103,6 +103,7 @@
                 collapsed: ($(window).width() < 768),
                 permissions: [],
                 menu: [
+                    { name: 'qr_scan', permission: "casher_panel", title: 'QR', color: "#aaa", icon: 'ti-bar-chart' },
                     { name: 'dashboard', permission: "admin_panel", title: 'Главная', color: "#aaa", icon: 'ti-bar-chart'},
                     { permission: "admin_panel", title: 'Места', color: "#aaa", icon: 'ti-world', children: [
                             { name: 'eloquent_list', permission: "admin_panel", params: { model: 'city' }, title: 'Города', color: "#aaa", icon: 'ti-world'},
@@ -134,7 +135,7 @@
                     { name: 'eloquent_list', permission: "admin_panel", params: { model: 'user' }, title: 'Пользователи', color: "#aaa", icon: 'ti-face-smile'},
                     { name: 'eloquent_list', permission: "admin_panel", params: { model: 'category' }, title: 'Категории', color: "#aaa", icon: 'ti-server'},
                     { name: 'eloquent_list', permission: "admin_panel", params: { model: 'ticket_design' }, title: 'Шаблоны', color: "#aaa", icon: 'ti-ticket'},
-                    { title: 'Настройки', icon: 'ti-settings', color: "#aaa", name: 'eloquent_list', params: { model: 'setting' }, children: [
+                    { title: 'Настройки', permission: "admin_panel", icon: 'ti-settings', color: "#aaa", name: 'eloquent_list', params: { model: 'setting' }, children: [
                             { name: 'eloquent_list', permission: "admin_panel", params: { model: 'setting' }, title: 'Настройки'},
                             { name: 'eloquent_list', permission: "admin_panel", params: { model: 'activity_log' }, title: 'Логи'},
                         ]

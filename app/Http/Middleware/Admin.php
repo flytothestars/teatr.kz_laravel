@@ -22,6 +22,8 @@ class Admin
             $user = Auth::user();
             if ($user->can('admin_panel'))
                 return $next($request);
+            if ($user->can('casher_panel'))
+                return $next($request);
             else
                 return redirect('/')->withErrors('У вас не достаточно прав для просмотра запрашиваемой
                 страницы.');

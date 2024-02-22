@@ -36,10 +36,11 @@ class EloquentHandler {
         return $rules;
     }
 
+    //Некорректно работает
     public static function checkPermissions($model_config, $operation, $object = NULL) {
         if(isset($model_config["permissions"]) && isset($model_config["permissions"][$operation])) {
             foreach($model_config["permissions"][$operation] as $perm) {
-                if(Auth::guest() || !Auth::user()->can($perm,$object)) {
+                if(Auth::guest() || Auth::user()->can($perm,$object)) {
                     abort(403, 'Access denied');
                 }
             }

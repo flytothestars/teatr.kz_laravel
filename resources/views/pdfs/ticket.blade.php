@@ -25,7 +25,7 @@
                     @endif
 
                     @if($design->order_exists)
-                        <div class="position-absolute right-img-content" style="@if($design->order_r) right: {{ $design->order_r }}px; @else left: {{ $design->order_l }}px; @endif top: {{ $design->order_t }}px;"><b>Номер заказа: </b>{{ $ticket->order_id }}</div>
+                        <div class="position-absolute right-img-content" style="@if($design->order_r) right: {{ $design->order_r }}px; @else left: {{ $design->order_l }}px; @endif top: {{ $design->order_t }}px;"><b>Номер заказа: </b>{{ $ticket->articul }}</div>
                     @endif
                     @if($design->user_exists)
                         <div class="position-absolute right-img-content" style="@if($design->user_r) right: {{ $design->user_r }}px; @else left: {{ $design->user_l }}px; @endif top: {{ $design->user_t }}px;"><b>Имя: </b>{{ $ticket->order->name }}</div>

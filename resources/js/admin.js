@@ -25,10 +25,12 @@ import Report from './vue/admin/views/Report'
 import Subscriptions from './vue/admin/views/Subscriptions'
 import Configs from './vue/admin/views/Configs'
 import GeneralConfig from './vue/admin/views/GeneralConfig'
+import QrPage from './vue/admin/views/QrPage'
 
 const routes = [
     { path: '/', redirect: '/dashboard' },
     { path: '/dashboard', name: 'dashboard', component: Dashboard },
+    { path: '/qr_scan', name: 'qr_scan', component: QrPage},
     { path: '/eloquent_configs', name: 'eloquent_configs', component: Configs },
     { path: '/general_config', name: 'general_config', component: GeneralConfig },
     { path: '/translation', name: 'translation', component: Translation },
@@ -63,5 +65,5 @@ const app = new Vue({
         $route (to, from){
 
         }
-    }
+    },
 });

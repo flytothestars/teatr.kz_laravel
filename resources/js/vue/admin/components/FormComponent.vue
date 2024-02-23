@@ -2,9 +2,10 @@
     <form enctype="multipart/form-data" id="eloquent-form">
         <div class="row">
 
-            <div class="col-12 border-bottom pb-3 mb-2" v-if="config.tabs">
+            <!-- Некорректно работает если нету локализация то выкидывает ошибку -->
+            <!-- <div class="col-12 border-bottom pb-3 mb-2" v-if="config.tabs">
                 <a class="btn border text-capitalize btn-themed toggle mr-2"  v-if="!(['kz','en','ru'].includes(tab) && !langs.includes(tab))" v-for="(tab,tind) in config.tabs" data-toggle="admincollapse" :data-target="'.collapse-'+tab" role="button" :class="{active: tind === 0}">{{ trans(tab) }}</a>
-            </div>
+            </div> -->
 
             <template v-for="tab in config.tabs">
                 <template v-if="$options.components[$options.filters.capitalize(model)+$options.filters.capitalize(tab)+'TabComponent']">
@@ -56,12 +57,12 @@
             },
         },
         props: {
-            object: { required: true },
-            config: { required: true },
-            media: { required: true },
-            model: { required: true },
+            object: { required: false },
+            config: { required: false },
+            media: { required: false },
+            model: { required: false },
             langs: {},
-            select_models: { required: true },
+            select_models: { required: false },
         },
     }
 </script>

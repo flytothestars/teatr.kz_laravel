@@ -3,13 +3,16 @@
 namespace App\Models\Specific;
 
 use App\Mail\SendTicket;
+use App\Mail\SendMail;
+use App\Models\PDF\PDFTicket;
+use Illuminate\Support\Facades\Mail;
 use App\Models\General\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Order extends Model {
 
@@ -130,17 +133,19 @@ class Order extends Model {
     }
 
     public function sendByEmail($email = NULL) {
-        if(!env('SEND_EMAILS')) {
-            return true;
-        }
+        // if(!env('SEND_EMAILS')) {
+        //     return true;
+        // }
         if(!$email) {
             $email = $this->email;
         }
+
+        
         try {
-            Mail::to($email)->send(new SendTicket($this));
+            $pdf = new PDFTicket($this);
+            Mail::to($email)->send(new SendMail($this, $pdf->getPDF()));
             $this->sent = 1;
             $this->save();
-//            Log::('mail was sent successfully','Order id'.$this->id);
             return true;
         } catch(\Exception $e) {
             \Illuminate\Support\Facades\Log::error($e);

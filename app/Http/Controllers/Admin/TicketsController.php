@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Specific\Order;
 use App\Models\Specific\Ticket;
 use App\Models\Specific\Timetable;
-use App\Models\Specific\Venue;
 use Illuminate\Http\Request;
 
 class TicketsController extends Controller

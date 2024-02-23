@@ -4,18 +4,18 @@
     <title>@yield('title','Документ')</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style>
-        @font-face {
+        /* @font-face {
             font-family: 'PTSans';
             font-style: normal;
             font-weight: normal;
-            src: url('{{ public_path("fonts/Lucida.ttf") }}') format('truetype');
+            src: url('{{ storage_path("fonts/Lucida.ttf") }}') format('truetype');
         }
         body {
             font-family: 'PTSans';
+        } */
+        body {
+           font-family: DejaVu Sans;
         }
-        /*body {*/
-        /*    font-family: DejaVu Sans;*/
-        /*}*/
         .w-100 {
             width: 100%;
         }
@@ -32,10 +32,10 @@
             margin-top: 20px;
         }
         .pl-4 {
-            padding-left: 40px;
+            padding-left: 20px;
         }
         .pr-4 {
-            padding-right: 40px;
+            padding-right: 20px;
         }
         .page-break {
             page-break-after: always;

@@ -164,6 +164,7 @@ export default {
             }
         },
         launchCloudPay() {
+            
             var widget = new cp.CloudPayments({ language: "kk" })
             let order = this.order
             widget.charge({ // options
@@ -180,6 +181,9 @@ export default {
                 },
                 function (options) { // success
                     window.noty('Спасибо!', 'Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email.');
+                    axios.get(`/admin/order/${this.order.id}/ticket/send`).then(res => {
+                        console.log('success')
+                    })
                     setTimeout(() => {
                         window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`
                     }, 500)

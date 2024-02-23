@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 //use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 //use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PDFTicket {
 
@@ -27,16 +28,29 @@ class PDFTicket {
         $venue = $timetable->venue;
         $user = Auth::user();
 
-        $pdf = App::make('snappy.pdf.wrapper');
-        $pdf->loadView('pdfs.ticket', compact('tickets','order', 'user', 'event', 'timetable', 'design', 'venue'))
+        $pdf = Pdf::loadView('pdfs.ticket', compact('tickets','order', 'user', 'event', 'timetable', 'design', 'venue'))
             ->setOption('margin-bottom', '0mm')
             ->setOption('margin-top', '0mm')
             ->setOption('margin-right', '0mm')
             ->setOption('margin-left', '0mm')
-            ->setPaper('a4');
-//            ->setOptions(['dpi' => 150]);
-
+            ->setPaper('a4')
+            ->setOption('isHtml5ParserEnabled', true)
+            ->setOption('isRemoteEnabled', true)
+            ->setOption('defaultFont', 'Arial')
+            ->setOption('dpi', 96)
+            ->setOption('fontHeightRatio', 1.3)
+            ->setOption('isFontSubsettingEnabled', true)
+            ->setOption('debugKeepTemp', true)
+            ->setOption('isPhpEnabled', true)
+            ->setOption('isHtml5ParserEnabled', true)
+            ->setOption('isJavascriptEnabled', true);
+        
         $this->pdf = $pdf;
+    }
+
+    public function getPdf()
+    {
+        return $this->pdf;
     }
 
 }

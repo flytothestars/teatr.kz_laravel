@@ -27,6 +27,7 @@ if(document.getElementById("vue-filtered-events")) {
         data() {
             return {
                 timefilters: [
+                    { id: 'all', title: "Все", type: "time"},
                     { id: 'today', title: "Сегодня", type: "time" },
                     { id: 'weekend', title: "На выходных", type: "time" },
                     { id: 'month', title: "В этом месяце", type: "time" },
@@ -36,7 +37,7 @@ if(document.getElementById("vue-filtered-events")) {
                 genres: [],
                 paginator: null,
                 selected: {
-                    time: null,
+                    time: 'all',
                     venue: null,
                     genre: null
                 },

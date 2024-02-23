@@ -16,7 +16,8 @@ use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Translatable\HasTranslations;
 
-class Event extends Model {
+class Event extends Model
+{
 
     use HasTranslations;
     use LogsActivity;
@@ -29,7 +30,8 @@ class Event extends Model {
     protected $table = 'events';
 
     public $translatable = [
-        'title', 'description'
+        'title',
+        'description'
     ];
 
     protected $fillable = [
@@ -105,60 +107,70 @@ class Event extends Model {
 
     /// *** Attributes *** ///
 
-    public function getLinkAttribute() {
-        return '/event/'.$this->slug;
+    public function getLinkAttribute()
+    {
+        return '/event/' . $this->slug;
     }
 
-    public function getTeaserAttribute() {
+    public function getTeaserAttribute()
+    {
         return $this->imagePrimarySrc('teaser');
     }
 
-    public function getShortAttribute() {
+    public function getShortAttribute()
+    {
         return Str::limit(strip_tags($this->description), 100, '');
     }
 
     /// *** Relations *** ///
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function ticketDesign() {
+    public function ticketDesign()
+    {
         return $this->belongsTo(TicketDesign::class, 'ticket_design_id');
     }
 
-    public function organizator() {
+    public function organizator()
+    {
         return $this->belongsTo(User::class, 'organizator_id');
     }
 
-    public function timetables() {
-        return $this->hasMany(Timetable::class)->orderBy('datetime','asc');
+    public function timetables()
+    {
+        return $this->hasMany(Timetable::class)->orderBy('datetime', 'asc');
     }
 
-    public function cast() {
+    public function cast()
+    {
         return $this->belongsToMany(Cast::class, 'event_cast', 'event_id', 'cast_id');
     }
 
-    public function feedbacks() {
+    public function feedbacks()
+    {
         return $this->hasMany(Feedback::class, 'event_id');
     }
 
     /// *** Custom *** ///
 
-    public static function afisha($filters = []) {
+    public static function afisha($filters = [])
+    {
         $city = isset($filters->city) ? $filters->city : session('city', env('DEFAULT_CITY'));
-        $order_ids = Timetable::future()->active()->orderBy('datetime','asc')->pluck('event_id')->toArray();
+        $order_ids = Timetable::future()->active()->orderBy('datetime', 'asc')->pluck('event_id')->toArray();
         $rawOrder = DB::raw(sprintf('FIELD(id, %s)', implode(',', $order_ids)));
         $q = Event::active()
-            ->whereHas('timetables',function($q) use($filters, $city) {
-                $q->future()->active()->whereHas('venue', function($q) use($city) {
+            ->whereHas('timetables', function ($q) use ($filters, $city) {
+                $q->future()->active()->whereHas('venue', function ($q) use ($city) {
                     $q->where('city_id', $city);
                 })->orderBy('datetime', 'asc');
-                if($filters && isset($filters->venue)) {
-                    $q->where('venue_id',$filters->venue);
+                if ($filters && isset($filters->venue)) {
+                    $q->where('venue_id', $filters->venue);
                 }
-                if($filters && isset($filters->time)) {
-                    switch($filters->time) {
+                if ($filters && isset($filters->time)) {
+                    switch ($filters->time) {
                         case "today":
                             $q->today();
                             break;
@@ -168,6 +180,7 @@ class Event extends Model {
                         case "month":
                             $q->month();
                             break;
+
                     }
                 }
             })
@@ -175,43 +188,59 @@ class Event extends Model {
             ->with('timetables')
             ->with('timetables.venue');
 
-        if($filters && isset($filters->genre)) {
-            $q->where('category_id',$filters->genre);
+        if ($filters && isset($filters->genre)) {
+            $q->where('category_id', $filters->genre);
         }
-        if($filters && isset($filters->ids)) {
+        if ($filters && isset($filters->ids)) {
             $q->whereIn('id', $filters->ids);
         }
-        if($filters && isset($filters->cast)) {
-            $q->whereHas('cast', function($q) use($filters) {
+        if ($filters && isset($filters->cast)) {
+            $q->whereHas('cast', function ($q) use ($filters) {
                 $q->where('id', $filters->cast);
             });
         }
-        if($filters && isset($filters->q)) {
-            $q->whereRaw('JSON_UNQUOTE(JSON_EXTRACT(title,"$.ru")) LIKE ?', ['%'.$filters->q.'%']);
+        if ($filters && isset($filters->q)) {
+            $q->whereRaw('JSON_UNQUOTE(JSON_EXTRACT(title,"$.ru")) LIKE ?', ['%' . $filters->q . '%']);
         }
         $q->orderByRaw($rawOrder);
-//        return $q->paginate(2);
+        //        return $q->paginate(2);
         return $q->paginate(14);
     }
 
+    public static function allAfisha($filters = [])
+    {
+        $city = isset($filters->city) ? $filters->city : session('city', env('DEFAULT_CITY'));
+        $order_ids = Timetable::future()->active()->orderBy('datetime', 'asc')->pluck('event_id')->toArray();
+        $rawOrder = DB::raw(sprintf('FIELD(id, %s)', implode(',', $order_ids)));
+        $q = Event::active()
+            ->whereHas('timetables', function ($q) use ($filters, $city) {
+                $q->future()->active()->orderBy('datetime', 'asc');
+            });
+        $q->orderByRaw($rawOrder);
 
-    public static function recentlySeen() {
+        return $q->paginate(14);
+    }
+
+    public static function recentlySeen()
+    {
         return self::afisha(new AfishaFilter(json_encode(['ids' => session('looked', [])])));
     }
 
-    public function addToRecentlySeen() {
-        $looked = session('looked',[]);
+    public function addToRecentlySeen()
+    {
+        $looked = session('looked', []);
         $looked[] = $this->id;
         $looked = array_unique($looked);
         $limit = 9;
-        if(count($looked) > $limit) {
-            $looked = array_slice($looked,-$limit, $limit);
+        if (count($looked) > $limit) {
+            $looked = array_slice($looked, -$limit, $limit);
         }
         session(['looked' => $looked]);
     }
 
 
-    public static function customCreate($request) {
+    public static function customCreate($request)
+    {
         $data = $request->all();
         $obj = self::create($data);
         $obj->cast()->sync($request->cast);
@@ -219,7 +248,8 @@ class Event extends Model {
     }
 
 
-    public function customUpdate($request) {
+    public function customUpdate($request)
+    {
         $data = $request->all();
         $this->update($data);
         $this->cast()->sync($request->cast);

@@ -15,7 +15,7 @@ class EventController extends Controller {
 
 
     public function afisha() {
-        $events = Event::afisha();
+        $events = Event::allAfisha();
         $news = News::active()->orderBy('date','desc')->simplePaginate(6);
         $feedbacks = Feedback::active()->simplePaginate(6);
         $city_id = session('city', 1);
@@ -26,7 +26,7 @@ class EventController extends Controller {
 
     public function afishaDynamic(Request $request) {
         $filter = new AfishaFilter($request->filters);
-        $events = Event::afisha($filter);
+        $events = $filter->time == 'all' ? Event::allAfisha($filter) : Event::afisha($filter);
         return response()->json([
             'events' => $events,
             'html'   => view('content.home.home__events_dynamic', compact('events'))->render()

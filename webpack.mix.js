@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/widget.js', 'public/js')
+    .js('resources/js/widget_without_pay.js', 'public/js')
     .js('resources/js/admin.js', 'public/js')
     .js('resources/js/site.js', 'public/js')
     .js('resources/js/iframe.js', 'public/js')

@@ -19,14 +19,14 @@ Vue.use(VueRouter)
 import WidgetInit from './vue/app/components/WidgetInit'
 import Event from './vue/app/components/Event'
 import Timetable from './vue/app/components/Timetable'
-import Checkout from './vue/app/components/Checkout'
+import CheckoutWithoutPay from './vue/app/components/CheckoutWithoutPay'
 
 const routes = [
     // { path: '/', redirect: '/dashboard' },
     { path: '/', name: 'widgetinit', component: WidgetInit },
     { path: '/:eventid', name: 'event', component: Event },
     { path: '/:eventid/:timetableid', name: 'timetable', component: Timetable },
-    { path: '/order/:id/:hash', name: 'checkout', component: Checkout },
+    { path: '/order/:id/:hash', name: 'checkoutwithoutpay', component: CheckoutWithoutPay },
 ]
 
 const router = new VueRouter({
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
 
 const load = () => {
     new Vue({
-        el: '#vue-event',
+        el: '#vue-withoutpay',
         router,
         store,
     });

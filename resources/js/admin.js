@@ -10,7 +10,8 @@ const files = require.context('./vue/admin/components', true, /\.vue$/i);
 files.keys().map(key =>
     Vue.component(key.split('/').pop().split('.')[0], files(key).default)
 );
-
+import VueZxingScanner from "vue-zxing-scanner";
+Vue.use(VueZxingScanner);
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 

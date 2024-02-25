@@ -13,6 +13,7 @@ use App\Models\Specific\Timetable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class APIOrderController extends Controller {
 
@@ -144,6 +145,54 @@ class APIOrderController extends Controller {
             $order->delete();
         }
         return response()->json(true);
+    }
+
+    public function getAboutTicket(Request $request, $code)
+    {
+        $order = OrderItem::where('barcode', $code)
+            ->with('order')
+            ->with('timetable')
+            ->with('section')
+            ->with('section.scheme')
+            ->with('timetable.event')
+            ->with('timetable.venue')->first();
+        if($order)
+        {
+            return response()->json([
+                'success' => true,
+                'data' => $order
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'data' => null
+        ]);
+    }
+
+    public function ticketChecked($code)
+    {
+        
+        $order = OrderItem::where('barcode', $code)->first();
+        if($order)
+        {
+            if($order->checked)
+            {
+                return response()->json([
+                    'success' => false,
+                    'data' => 'Билет был подтвержден'
+                ]);
+            }
+            $order->checked = 1;
+            $order->save();
+            return response()->json([
+                'success' => true,
+                'data' => 'Билет подтвержден'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'data' => 'Билет не найден'
+        ]);
     }
 
 }

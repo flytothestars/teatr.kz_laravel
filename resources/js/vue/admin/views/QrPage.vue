@@ -52,12 +52,12 @@
     }
   };
   </script>
-  
- -->
+   -->
+ 
 
 
-<!-- 
-<template>
+
+<!-- <template>
     <div>
         <div>
             <h1>QR Code Scanner</h1>
@@ -74,54 +74,99 @@ export default {
     components: {
     },
 };
-</script>
-   -->
+</script> -->
+  
 
 
 
 <template>
-    <div class="container">
-        <h1>Qr scaner</h1>
-        <div style="width:500px" id="qr_code_scanner"></div>
-        <p>result : {{ result }}</p>
-        <div style="width:300px">
-            <!-- <v-zxing @decode="onDecode" /> -->
-        </div>
+  <div class="container">
+    <h1>Qr scaner</h1>
+    <div style="width:500px" id="qr_code_scanner"></div>
+    <div v-if="buttonCheck">
+      <p>{{ title }}</p>
+      <p>Дата и время: {{ datetime }}</p>
+      <p>Ряд: {{ row }}, место {{ seat }}</p>
+      <p>Цена: {{ price }}</p>
+      <button @click="successTicket">Подтвержден</button>
     </div>
+    <p>{{msg}}</p>
+
+    <div style="width:300px">
+      <!-- <v-zxing @decode="onDecode" /> -->
+    </div>
+  </div>
 </template>
 <script>
 import { Html5Qrcode } from 'html5-qrcode'
 export default {
-    data() {
-        return {
-            result: ''
+  data() {
+    return {
+      result: '',
+      row: '',
+      seat: '',
+      price: '',
+      datetime: '',
+      title: '',
+      buttonCheck: false,
+      msg: ''
+    }
+  },
+
+  methods: {
+    successTicket()
+    {
+      console.log('checked')
+      axios.post(`/api/order/${this.result}/check`).then(res => {
+        console.log(res.data.data)
+        if(res.data.success){
+          this.row = '',
+          this.seat = '',
+          this.price = '',
+          this.datetime = '',
+          this.title = '',
+          this.buttonCheck = false,
+          this.msg = res.data.data
         }
-    },
-
-    methods: {
-        onDecode(result) {
-            console.log(result)
-            this.result = result
-        },
-        createscanqrcodes() {
-            const html5QrCodes = new Html5Qrcode("qr_code_scanner");
-
-            html5QrCodes.start({ facingMode: { exact: "user" } }, {
-                fps: 10,
-                qrbox: {
-                    width: 250,
-                    height: 250
-                }
-            }, this.onScanSuccess)
-        },
-
-        onScanSuccess(resultde) {
-            this.result = resultde;
+        else{
+          this.msg = res.data.data
         }
+      })
+    },
+    onDecode(result) {
+      console.log(result)
+      this.result = result
+    },
+    createscanqrcodes() {
+      const html5QrCodes = new Html5Qrcode("qr_code_scanner");
 
+      html5QrCodes.start({ facingMode: { exact: "user" } }, {
+        fps: 10,
+        qrbox: {
+          width: 250,
+          height: 250
+        }
+      }, this.onScanSuccess)
     },
-    async mounted() {
-        this.createscanqrcodes();
-    },
+
+    onScanSuccess(resultde) {
+      this.result = resultde;
+      console.log(this.result)
+      axios.post(`/api/order/${this.result}/ticket`).then(res => {
+        console.log('success')
+        this.price = res.data.data.price
+        this.row = res.data.data.row
+        this.seat = res.data.data.seat
+        this.title = res.data.data.timetable.event.title.ru
+        this.datetime = res.data.data.timetable.formatted_date
+        this.buttonCheck = true
+        this.msg
+      })
+    }
+
+  },
+  mounted() {
+    this.createscanqrcodes();
+  },
 };
 </script>

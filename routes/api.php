@@ -27,4 +27,6 @@ Route::group(['middleware' => [], 'namespace' => 'API'], function () {
     Route::get('/order/{id}/{hash}', [APIOrderController::class, 'getOrder']);
     Route::delete('/order/{id}/{hash}', [APIOrderController::class, 'cancelOrder']);
     Route::get('/settings', [APISettingsController::class, 'getSettings']);
+    Route::post('/order/{code}/ticket', [APIOrderController::class, 'getAboutTicket']);
+    Route::post('/order/{code}/check', [APIOrderController::class, 'ticketChecked']);
 });

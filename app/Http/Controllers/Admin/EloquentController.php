@@ -148,12 +148,12 @@ class EloquentController extends Controller
         EloquentHandler::checkPermissions($model_config,"create");
         if(method_exists($class_name,'customCreate')) {
             $obj = $class_name::customCreate($request);
-            if($class_name instanceof User){
+            if($class_name == 'App\Models\General\User'){
                 $obj->assignRole($request->roles);
             }
         } else {
             $obj = $class_name::create($request->all());
-            if($class_name instanceof User){
+            if($class_name == 'App\Models\General\User'){
                 $obj->assignRole($request->roles);
             }
         }
@@ -187,12 +187,12 @@ class EloquentController extends Controller
         EloquentHandler::checkPermissions($model_config,"update",$obj);
         if(method_exists($obj,'customUpdate')) {
             $obj->customUpdate($request);
-            if($class_name instanceof User){
+            if($class_name == 'App\Models\General\User'){
                 $obj->syncRoles($request->roles);
             }
         } else {
             $obj->update($request->all());
-            if($class_name instanceof User){
+            if($class_name == 'App\Models\General\User'){
                 $obj->syncRoles($request->roles);
             }        
         }

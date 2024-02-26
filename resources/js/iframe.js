@@ -50,7 +50,7 @@
                 '<div class="spaceduck-header"></div>' +
                 '<a id="spaceduck-close" onclick="">&times;</a>' +
                 '<div class="spaceduck-iframe-holder">' +
-                '<iframe src="'+'http://127.0.0.1:8000/'+url_part+ get_params+'"></iframe>' +
+                '<iframe src="'+host+url_part+ get_params+'"></iframe>' +
                 '<div class="spaceduck-close-frame"></div>' +
                 '</div></div></div>');
         }

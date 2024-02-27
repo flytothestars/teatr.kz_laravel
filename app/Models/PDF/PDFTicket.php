@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 //use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 //use Barryvdh\DomPDF\Facade as PDF;
-use \PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PDFTicket {
 
@@ -28,7 +28,7 @@ class PDFTicket {
         $venue = $timetable->venue;
         $user = Auth::user();
 
-        $pdf = PDF::loadView('pdfs.ticket', compact('tickets','order', 'user', 'event', 'timetable', 'design', 'venue'))
+        $pdf = Pdf::loadView('pdfs.ticket', compact('tickets','order', 'user', 'event', 'timetable', 'design', 'venue'))
             ->setOption('margin-bottom', '0mm')
             ->setOption('margin-top', '0mm')
             ->setOption('margin-right', '0mm')

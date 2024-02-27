@@ -140,7 +140,7 @@ export default {
     createscanqrcodes() {
       const html5QrCodes = new Html5Qrcode("qr_code_scanner");
 
-      html5QrCodes.start({ facingMode: { exact: "user" } }, {
+      html5QrCodes.start({ facingMode: { exact: "environment" } }, {
         fps: 10,
         qrbox: {
           width: 250,

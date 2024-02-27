@@ -65,12 +65,11 @@ class TicketsController extends Controller
 
     public function sendTicketsWithoutPay($id) {
         $order = Order::where('id',$id)->first();
-        $order->update([
-            'paid' => 1
-        ]);
         if(!$order) {
             abort(404);
         }
+        $order->paid = 1;
+        $order->save();
         if($order->sendByEmail()) {
             return "письмо отправлено";
         } else {

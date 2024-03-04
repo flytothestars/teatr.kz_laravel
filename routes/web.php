@@ -115,6 +115,7 @@ Route::group(['middleware' => ['web', 'basicauth'], 'namespace' => 'Web'], funct
     Route::get('/', [EventController::class, 'afisha'])->name('afisha');
     Route::get('/afisha/dynamic', [EventController::class, 'afishaDynamic']);
     Route::get('/widget', [EventController::class, 'widget'])->name('widget');
+    Route::get('/new_widget', [EventController::class, 'new_widget'])->name('new_widget');
     Route::get('/widget_without_pay', [EventController::class, 'widget_without_pay'])->name('widget_without_pay');
     Route::get('/event/{slug}', [EventController::class, 'event'])->name('event');
 

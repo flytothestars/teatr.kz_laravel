@@ -72,6 +72,15 @@ class EventController extends Controller {
         return view('content.event.widget', ['widget' => true]);
     }
 
+    public function new_widget()
+    {
+        $user = Auth::user();
+        if($user && !$user->api_token) {
+            $user->generateAPIToken();
+        }
+        // dd(view('content.event.new_widget', ['new_widget' => true]));
+        return view('content.event.new_widget', ['new_widget' => true]);    
+    }
     public function widget_without_pay(Request $request) {
         $user = Auth::user();
         if($user && !$user->api_token) {

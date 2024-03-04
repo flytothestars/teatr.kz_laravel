@@ -6,6 +6,8 @@
     <script src="{{ mix('js/widget.js') }}" defer></script>
 @elseif(isset($widget_without_pay) && $widget_without_pay)
     <script src="{{ mix('js/widget_without_pay.js') }}" defer></script>
+@elseif(isset($new_widget) && $new_widget)
+    <script src="{{ mix('js/new_widget.js') }}" defer></script>
 @else
     <script src="{{ mix('js/site.js') }}" defer></script>
 @endif

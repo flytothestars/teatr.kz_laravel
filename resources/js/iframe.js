@@ -2,7 +2,7 @@
     var head = document.getElementsByTagName('head')[0];
 
     var css = document.createElement('link');
-    var host = 'https://teatr.kz/'
+    var host = 'http://127.0.0.1:8000/'
     css.type = 'text/css';
     css.rel = 'stylesheet';
     css.href = host+"css/iframe.css?2";
@@ -68,7 +68,7 @@
 
         var body = document.getElementsByTagName('body')[0];
         var wrap = document.getElementsByClassName('spaceduck-iframe-wrap');
-        var url_part = 'widget#/';
+        var url_part = 'new_widget#/';
         var get_params = '?iframe=1';
         if(hall_id && hall_id > 0) { get_params += '&hall_id='+hall_id; }
         if(language) { get_params += '&lang='+language; }

@@ -6,6 +6,11 @@
 .widget-part {
   max-width: 1200px;
   height: 100vh;
+  font-family: Inter;
+  padding: 20px 50px;
+  @media (max-width:575px) {
+    padding: 10px;
+  }
 }
 .right-content {
   background: #fff;
@@ -39,7 +44,7 @@
   //  max-width: 810px;
   //}
   .content-part {
-    padding: 12px 38px;
+    padding: 0 38px;
     height: 100%;
     .venue-wrapper {
       background: #fff;

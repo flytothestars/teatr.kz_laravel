@@ -1,11 +1,11 @@
 <template>
     <div class="newtop-sidebar">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-start mt-3 pl-3">
             <div :class="{ active: step === (mind + 1) }" class="top__item" v-for="(m, mind) in menu">
                 <div  @click="stepClicked((mind + 1))">
-                    <!-- <div class="newtop__title d-md-block d-none">{{ m.title }}</div> -->
-                    <!-- <div class="newtop__title d-md-none d-block">{{ m.mob_title }}</div> -->
-                    <div class="newtop__subtitle d-md-block d-none">{{ m.note }} -></div>
+                    <!-- <div class="newtop__title d-md-block d-none">{{ m.title }}<img v-if="mind != 2" src="../../../../../img/Arrow - Right.png"/></div> -->
+                    <!-- <div class="newtop__title d-md-none d-block">{{ m.mob_title }}<img v-if="mind != 2" src="../../../../../img/Arrow - Right.png"/></div> -->
+                    <div class="newtop__subtitle d-block d-none">{{ m.note }} <img v-if="mind != 2" src="../../../../../img/Arrow - Right.png"/></div>
                 </div>
             </div>
         </div>
@@ -53,6 +53,19 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .top__item{
+        width: auto;
+        padding: 0;
+    }
+    .newtop__subtitle{
+        display: flex;
+        width: auto;
+        img{
+            width: 24px;
+        }
+        @media (max-width: 575px) {
+            font-size: 14px;
+    }
+    }
 </style>

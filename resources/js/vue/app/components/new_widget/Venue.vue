@@ -2,7 +2,7 @@
     <div class="position-relative">
         <zoom-block/>
         <div class="venue-wrapper">
-            <svg class="w-100 h-100 position-absolute" :viewBox="'0 0 600 600'" :style="`transform: scale(${scale})`">
+            <svg class="w-100 position-absolute" :viewBox="'0 0 600 600'" :style="`transform: scale(${scale})`">
                 <template v-for="(s, sind) in scheme.sections">
                     <SectionSvg @click.native="selectSector(sind, s)"
                                 :section="s"

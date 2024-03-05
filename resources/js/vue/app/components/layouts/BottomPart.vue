@@ -1,18 +1,35 @@
 <template>
-    <div class="text-md-right bottom-part__content" v-if="step > 1">
-        <a v-if="step > 1 && step < 3 && !(step == 2 && timetable.type == 'pricegroups')" @click="back" class="btn btn-themed-secondary bottom-btn">
+    <div class="text-center bottom-part__content" v-if="step > 1">
+        <template v-if="cart" v-for="item in cart">
+            <div class="row justify-content-around mb-5">
+                <div class="col-md-5 text-center seat-bg">{{ item.section_name.ru }}</div>
+                <div class="col-md-5 text-center seat-bg">Ряд: {{ item.row }}, {{ item.seat }} место - {{ item.price }} </div>
+            </div>
+        </template>
+
+        <template v-if="step > 1 && step < 3 && cart.length > 0">
+            <p class="h5 text-left ml-3">Введите данные</p>
+            <div class="row justify-content-around mb-2">
+                <input  placeholder="Введите E-mail" type="text" class="input-themed col-md-5">
+                <input placeholder="Введите номер телефона" type="text" class="input-themed col-md-5">
+            </div>
+        </template>
+
+        <!-- <a v-if="step > 1 && step < 3 && !(step == 2 && timetable.type == 'pricegroups')" @click="back" class="btn btn-themed-secondary bottom-btn">
             Назад
-        </a>
+        </a> -->
         <a v-if="step == 3 && order" @click="cancelOrder" class="btn btn-themed-secondary bottom-btn">
             Отменить
         </a>
-        <a v-if="step > 1 && step < 3 && cart.length > 0" @click="checkout" class="btn btn-themed bottom-btn ml-2">
+        <a v-if="step > 1 && step < 3 && cart.length > 0" @click="checkout" class="btn button-themed bottom-btn my-4 pb-5">
             Оформить
         </a>
-        <a v-if="step == 3 && order && checkouttime > 0" @click="fillOrder" class="btn btn-themed bottom-btn ml-2">
-            <span class="d-md-inline d-none">Перейти к оплате</span>
-            <span class="d-md-none d-inline">К оплате</span>
+        <a v-if="step == 3 && order && checkouttime > 0" @click="fillOrder" class="btn button-themed bottom-btn my-4 pb-5">
+            <span class=" d-none">Перейти к оплате</span>
+            <span class=" d-inline">К оплате</span>
         </a>
+        <p  class="offert">Нажимая “Оплатить”, вы соглашаетесь</p>
+         <p class="offert"><a href="">с условиями приобретения</a> и <a href="">офертой</a></p>
     </div>
 </template>
 
@@ -65,7 +82,61 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.offert{
+    margin-bottom: 4px;
+    color: #A5ABB7;
+    a{
+        color: #3BA1FF;
+        cursor: pointer;
+    }
+}
+
 .btn-themed-secondary, .btn-themed {
     font-size: 14px;
 }
+.seat-bg{
+    background: #CEE8FF;
+    padding: 24px 16px;
+    border-radius: 16px;
+    @media (max-width: 768px){
+        margin-bottom: 10px;
+    }
+}
+.input-themed{
+    align-items: center;
+    width: 80%;
+    padding: 24px 16px;
+    margin:  auto;
+    background: #fff;
+    border-radius: 16px;
+    font-size: 20px;
+    border: 1px solid #AEB3DB;
+    @media (max-width: 768px){
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+.button-themed{
+    align-items: center;
+    width: 80%;
+    height: 56px;
+    padding: 24px 16px;
+    margin:  auto;
+    background: #FFC737;
+    border-radius: 16px;
+    font-size: 20px;
+    @media (max-width: 768px){
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+.bottom-part__content{
+    @media (max-width: 768px){
+        flex-direction: column;
+        div{
+            flex-direction: column;
+        }
+    }
+}
+
 </style>

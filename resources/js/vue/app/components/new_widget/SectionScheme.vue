@@ -2,7 +2,10 @@
     <div class="position-relative">
         <zoom-block/>
         <div class="venue-wrapper" >
-            <div class="scheme-price-bubbles" v-if="prices.length > 0">
+            <div class="scena">Сцена</div>
+            <!-- <div class="" v-if="scheme.sections[selectedSectionIndex]">{{ scheme.sections[selectedSectionIndex].title.ru }}</div> -->
+            <div class="scheme-price-bubbles d-flex" v-if="prices.length > 0">
+                <div class="sheme-title">{{ title }}</div>
                 <div class="scheme-price-bubble" v-for="(p, pind) in prices">
                     <span class="price-color" :class="`color-${pind}`"></span>
                     <span>{{ p | formatNumber }}</span>
@@ -31,7 +34,7 @@
                      v-for="r in Object.keys(rows)"
                      :key="'row-'+r"
                      :style="`top: ${rows[r].y}px`">
-                    Ряд {{ r }}
+                    ряд {{ r }}
                 </div>
             </div>
         </div>
@@ -75,6 +78,10 @@
                 default() {
                     return []
                 },
+            },
+            title:{
+                type:String,
+                required: true
             }
         },
         watch: {
@@ -252,6 +259,30 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.sheme-title{
+    font-size: 20px;
+    margin: 2px 14px 0 18px;
+    text-align: start;
+    @media (max-width: 768px){
+        font-size: 14px;
+    }
+}
+.scheme-price-bubble{
+    display: flex!important;
+    align-items: center;
+    background: #F2F2F2;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-right: 10px!important;
+}
+.scena{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    border: 1px solid #d2d2d2;
+    border-radius: 24px;
+    padding: 6px 125px 6px 125px;
+    margin-bottom: 10px;
+}
 </style>

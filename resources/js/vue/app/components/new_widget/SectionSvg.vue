@@ -1,4 +1,5 @@
 <template>
+    <!-- <div class="">{{ props }}</div> -->
     <g class="section" v-if="section.svg">
         <path stroke="black"
               :stroke-width="selected ? '4' : '0'"

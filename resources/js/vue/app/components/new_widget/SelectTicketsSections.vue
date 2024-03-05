@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <Venue class="mb-3" :scheme="scheme"
                view="user"
                v-if="selectedSectionIndex === null"
@@ -11,6 +12,7 @@
                     :prices="prices"
                     :selectedSeats="selectedSeats"
                     :mouse-selectable="false"
+                    :title="scheme.sections[selectedSectionIndex].title.ru"
                     @seatPressed="seatPressed"
             />
             <select-enter-section-tickets-amount v-if="type == 'enter'"

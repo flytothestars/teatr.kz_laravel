@@ -6,7 +6,7 @@
     <div id="vue-new-widget" class="widget-part mx-auto">
         <div class="row no-gutters h-100">
             <div class="col">
-                <div class="right-content">
+                <div class="right-content ">
                     <template>
                         <info-event />
                     </template>
@@ -16,7 +16,7 @@
                     <div class="content-part">
                         <router-view/>
                     </div>
-                    <div class="bottom-part d-md-block d-none">
+                    <div class="bottom-part">
                         <bottom-part/>
                     </div>
                 </div>

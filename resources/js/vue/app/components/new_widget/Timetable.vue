@@ -1,6 +1,6 @@
 <template>
     <div v-if="timetable">
-        <div v-if="timetable.type == 'sections'"> zxczxc
+        <div v-if="timetable.type == 'sections'">
             <select-tickets-sections/>
         </div>
         <div v-if="timetable.type == 'pricegroups'">

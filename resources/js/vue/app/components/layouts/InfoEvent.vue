@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col">
                 <div class="event__image">
-                    <img  style="width: 140px;height: 181px" src="../../../../../../storage/app/public/events/10/79.png" />
+                    <img  style="width: 140px;height: 181px" src="../../../../../../public/images/image15.png" />
                 </div>
             </div>
             <div class="col-sm-9">

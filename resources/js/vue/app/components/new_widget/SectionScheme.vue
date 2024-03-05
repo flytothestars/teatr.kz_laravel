@@ -1,8 +1,8 @@
 <template>
-    <div class="position-relative">
+    <div class="position-relative mt-4">
         <zoom-block/>
         <div class="venue-wrapper" >
-            <div class="scena">Сцена</div>
+            <div class="scena mb-2" style="width: 60%;margin: 0 auto; padding: 0 20%;">Сцена</div>
             <!-- <div class="" v-if="scheme.sections[selectedSectionIndex]">{{ scheme.sections[selectedSectionIndex].title.ru }}</div> -->
             <div class="scheme-price-bubbles d-flex" v-if="prices.length > 0">
                 <div class="sheme-title">{{ title }}</div>

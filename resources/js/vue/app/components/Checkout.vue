@@ -122,7 +122,9 @@ export default {
             "order",
             "event",
             "user",
-            "checkouttime"
+            "checkouttime",
+            "userphone",
+            "useremail",
         ]),
         minutes() {
             return String(Math.floor(this.checkouttime / 60)).padStart(2, "0");
@@ -138,6 +140,8 @@ export default {
         }
         EventBus.$on("fillOrder", this.orderFill);
         this.populateFromUser();
+        this.phone = this.userphone
+        this.email = this.useremail
         this.launchTimer();
     },
     methods: {

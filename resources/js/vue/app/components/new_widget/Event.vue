@@ -2,7 +2,7 @@
     <div>
         <div v-if="event"  class="text-center">
             <div class="mt-3 mb-2">
-                {{ transName(event.title) }} qweqwe
+                {{ transName(event.title) }}
             </div>
             <div v-for="t in event.timetables">
                 <router-link  :to="`/${event.id}/${t.id}`"  class="timetable-btn">

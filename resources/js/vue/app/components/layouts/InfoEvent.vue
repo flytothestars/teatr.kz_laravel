@@ -1,46 +1,34 @@
 <template>
-    <div class="info">
+    <div v-if="step != 3" class="info">
         <div class="row">
             <div class="col">
                 <div class="event__image">
-                    <img src="../../../../../img/image 15.png" />
+                    <img  style="width: 140px;height: 181px" src="../../../../../../storage/app/public/events/10/79.png" />
                 </div>
             </div>
             <div class="col-sm-9">
                 <div class="col">
                     <div class="event__name">
-                        <p class="h4 font-weight-bold">Золотой квадрат</p>
+                        <p class="h4 font-weight-bold">{{ timetable.event.title.ru }}</p>
                     </div>
                     <div class="event__time mt-5 row">
-                        <img
-                            class="img-info mx-3 "
-                            src="../../../../../img/Calendar - Dates.png"
-                            alt=""
-                        />
+                        <img class="img-info mx-3 " src="../../../../../img/Calendar - Dates.png" alt="" />
                         <p class="h5 font-weight-light">
-                            Дата события: 25 мар. -
-                            <span class="font-weight-bold">20:00</span>
+                            Дата события: {{ timetable.formatted_date }}
                         </p>
                     </div>
                     <div class="event__place row">
-                        <img
-                            class="img-info mx-3"
-                            src="../../../../../img/Pin.png"
-                            alt=""
-                        />
+                        <img class="img-info mx-3" src="../../../../../img/Pin.png" alt="" />
                         <p class="h5 font-weight-light">
-                            Место проведения: <a class="link-geo" href="#">пр. Абая, 43</a>
+                            Место проведения: <a class="link-geo"
+                                href="#">{{ venue.title.ru }},{{ venue.title.address }}</a>
                         </p>
                     </div>
                     <div class="event__price row">
-                        <img
-                            class="img-info pl-1 mx-3 img-last"
-                            src="../../../../../img/₸.png"
-                            alt=""
-                        />
+                        <img class="img-info pl-1 mx-3 img-last" src="../../../../../img/₸.png" alt="" />
                         <!-- <span class="h4 font-weight-light mx-3">₸</span> -->
                         <p class="h5 font-weight-light">
-                            Цены на билеты: 8 000 ₸ - 28 000 ₸
+                            Цены на билеты: {{ timetable.event.min_price }} ₸ - {{ timetable.event.max_price }} ₸
                         </p>
                     </div>
                 </div>
@@ -54,7 +42,7 @@ import { mapState } from "vuex";
 
 export default {
     computed: {
-        ...mapState(["step", "cart", "order", "timetable"])
+        ...mapState(["step", "cart", "order", "timetable", "venue"])
     },
     data() {
         return {
@@ -102,37 +90,45 @@ export default {
 .event__image {
     margin: 0 20px 0 30px;
     border-radius: 8px;
+
     img {
         width: auto;
         height: 181px;
+
         @media (max-width: 575px) {
             margin: 20px 0;
         }
     }
+
     @media (max-width: 575px) {
         margin: 0 auto;
         display: flex;
         justify-content: center;
     }
 }
-.event__name{
+
+.event__name {
     @media (max-width: 575px) {
-        p{
+        p {
             text-align: center;
         }
     }
 }
-.link-geo{
+
+.link-geo {
     color: #3CA1FF;
 }
+
 .info {
     .img-info {
         width: 24px;
         height: 24px;
     }
+
     .img-last {
         width: 20px !important;
     }
+
     @media (max-width: 575px) {
         background: #F6F7F8;
         border-radius: 8px;

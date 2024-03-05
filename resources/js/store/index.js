@@ -20,6 +20,8 @@ export default new Vuex.Store({
     cart: [],
     user: null,
     settings: null,
+    userphone: null,
+    useremail: null,
   },
   getters:{
     getCartSum(state) {
@@ -29,6 +31,12 @@ export default new Vuex.Store({
   mutations: {
     setVenue(state, venue) {
       state.venue = venue
+    },
+    setUserphone(state, userphone) {
+      state.userphone = userphone
+    },
+    setUseremail(state, useremail) {
+      state.useremail = useremail
     },
     setScheme(state, scheme) {
       state.scheme = scheme

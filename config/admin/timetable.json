@@ -11,7 +11,7 @@
     "modal": "modal-xl",
     "tabs": ["general", "ru", "kz"],
     "additional_links": [
-        {"title": "<i class='ti-eye grey-color' data-toggle='tooltip' title='На страницу сеанса'></i>", "url": "/widget#/%event_id%/%id%"},
+        {"title": "<i class='ti-eye grey-color' data-toggle='tooltip' title='На страницу сеанса'></i>", "url": "/new_widget#/%event_id%/%id%"},
         {"title": "<i class='ti-game spaceduck-widget grey-color' data-event-id='%event_id%' data-timetable-id='%id%' data-toggle='tooltip' title='Запустить виджет'></i>"},
         {"title": "<i class='ti-ticket grey-color' data-toggle='tooltip' title='Проставить цены'></i>", "url": "/admin#/timetable/%id%"},
         {"title": "<i class='ti-shopping-cart grey-color' data-toggle='tooltip' title='Список продаж'></i>", "url": "/admin/report/sales/excel?timetable_ids=%id%"}

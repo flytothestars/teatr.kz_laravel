@@ -5,13 +5,13 @@
 @section('content')
     <div id="vue-withoutpay" class="widget-part mx-auto">
         <div class="row no-gutters h-100">
-            <div class="col-auto">
-                <left-sidebar/>
-            </div>
             <div class="col">
                 <div class="right-content">
                     <template>
-                        <top-sidebar/>
+                        <info-event />
+                    </template>
+                    <template>
+                        <new-top-sidebar/>
                     </template>
                     <div class="content-part">
                         <router-view/>

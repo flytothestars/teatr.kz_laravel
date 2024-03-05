@@ -2,7 +2,7 @@
     var head = document.getElementsByTagName('head')[0];
 
     var css = document.createElement('link');
-    var host = 'http://127.0.0.1:8000/'
+    var host = 'https://teatr.kz/'
     css.type = 'text/css';
     css.rel = 'stylesheet';
     css.href = host+"css/iframe.css?2";

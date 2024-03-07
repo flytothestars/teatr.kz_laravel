@@ -3,9 +3,9 @@
         <div class="row">
 
             <!-- Некорректно работает если нету локализация то выкидывает ошибку -->
-            <!-- <div class="col-12 border-bottom pb-3 mb-2" v-if="config.tabs">
-                <a class="btn border text-capitalize btn-themed toggle mr-2"  v-if="!(['kz','en','ru'].includes(tab) && !langs.includes(tab))" v-for="(tab,tind) in config.tabs" data-toggle="admincollapse" :data-target="'.collapse-'+tab" role="button" :class="{active: tind === 0}">{{ trans(tab) }}</a>
-            </div> -->
+            <div class="col-12 border-bottom pb-3 mb-2" v-if="config.tabs">
+                <a class="btn border text-capitalize btn-themed toggle mr-2"  v-if="!(['kz','en','ru'].includes(config.tab) && !langs.includes(config.tab))" v-for="(tab,tind) in config.tabs" data-toggle="admincollapse" :data-target="'.collapse-'+tab" role="button" :class="{active: tind === 0}">{{ trans(tab) }}</a>
+            </div>
 
             <template v-for="tab in config.tabs">
                 <template v-if="$options.components[$options.filters.capitalize(model)+$options.filters.capitalize(tab)+'TabComponent']">

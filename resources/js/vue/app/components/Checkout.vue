@@ -175,8 +175,8 @@ export default {
                         this.$store.commit("updateCart", { sign, ticket });
                     });
                     this.form.name = order.name;
-                    this.form.email = order.email;
-                    this.form.phone = order.phone;
+                    this.form.email = this.useremail;
+                    this.form.phone = this.userphone;
                     if (!order.name) {
                         this.populateFromUser();
                     }
@@ -186,8 +186,8 @@ export default {
         populateFromUser() {
             if (this.user) {
                 this.form.name = this.user.name;
-                this.form.email = this.user.email;
-                this.form.phone = this.user.phone;
+                this.form.email = this.useremail;
+                this.form.phone = this.userphone;
             }
         },
         orderFill() {

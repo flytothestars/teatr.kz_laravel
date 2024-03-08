@@ -172,17 +172,18 @@ class APIOrderController extends Controller {
     public function ticketChecked($code)
     {
         
-        $order = OrderItem::where('barcode', $code)->first();
+        $orderItem = OrderItem::where('barcode', $code)->first();
+        $order = Order::where('id', $orderItem->order_id)->first();
         if($order)
         {
-            if($order->checked)
+            if($order->confirmed)
             {
                 return response()->json([
                     'success' => false,
                     'data' => 'Билет был подтвержден'
                 ]);
             }
-            $order->checked = 1;
+            $order->confirmed = 1;
             $order->save();
             return response()->json([
                 'success' => true,

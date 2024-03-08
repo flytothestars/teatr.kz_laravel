@@ -39,11 +39,13 @@ class Order extends Model {
         'ip',
         'paid',
         'sent',
+        'confirmed',
     ];
 
     protected $casts = [
         'paid' => 'boolean',
         'sent' => 'boolean',
+        'confirmed' => 'boolean',
     ];
 
     /// *** Logging *** ///

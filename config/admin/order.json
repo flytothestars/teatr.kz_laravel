@@ -138,6 +138,21 @@
                 "false": "<span class='badge badge-secondary'>Нет<\/span>",
                 "true": "<span class='badge badge-success'>Да<\/span>"
             }
+        },
+        "confirmed": {
+            "type": "checkbox",
+            "name": "Подтвержден",
+            "form": true,
+            "wrapclasses": "col-md-12",
+            "tab": "general",
+            "table": true,
+            "tablesort": true,
+            "tablesearch": true,
+            "likesearch": false,
+            "table_show": {
+                "false": "<span class='badge badge-secondary'>Нет<\/span>",
+                "true": "<span class='badge badge-success'>Да<\/span>"
+            }
         }
     }
 }

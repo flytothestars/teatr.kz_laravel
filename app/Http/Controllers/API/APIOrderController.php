@@ -15,55 +15,58 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-class APIOrderController extends Controller {
+class APIOrderController extends Controller
+{
 
 
-    public function getOrder($id, $hash, Request $request) {
-        $order = Order::where('id',$id)
+    public function getOrder($id, $hash, Request $request)
+    {
+        $order = Order::where('id', $id)
             ->with('timetable')
             ->with('timetable.event')
             ->with('orderItems')
             ->with('orderItems.section')
-            ->where('hash',$hash)
+            ->where('hash', $hash)
             ->first();
-        if(!$order) {
+        if (!$order) {
             abort(404);
         }
         return response()->json([
             'order' => $order,
-            'user'  => $request->user('api')
+            'user' => $request->user('api')
         ]);
     }
 
 
-    public function initOrder(OrderInitRequest $request) {
+    public function initOrder(OrderInitRequest $request)
+    {
 
         $timetable = Timetable::findOrFail($request->timetable_id);
 
-        if(!$timetable->active) {
+        if (!$timetable->active) {
             return response()->json(['error' => 'Мероприятие недоступно']);
         }
 
         $user = $request->user('api');
-        
+
         $order = Order::create([
-            'articul'      => $this->generateRandomArticul(),
+            'articul' => $this->generateRandomArticul(),
             'timetable_id' => $request->timetable_id,
-            'user_id'      => $user ? $user->id : null,
-            'api'          => $timetable->api,
-            'ip'           => $request->ip()
+            'user_id' => $user ? $user->id : null,
+            'api' => $timetable->api,
+            'ip' => $request->ip()
         ]);
 
         $order->price = $order->populateFromCart($request->cart);
 
-        if($timetable->api_id) {
+        if ($timetable->api_id) {
             $api_class = $timetable->getAPIClass();
-            if(!$api_class) {
+            if (!$api_class) {
                 return response()->json(['error' => 'API недоступен']);
             }
             $api = new $api_class;
             $response = $api->createOrder($timetable, $request->cart, $order);
-            if(!$response) {
+            if (!$response) {
                 return response()->json(['error' => 'Произошла ошибка - попробуйте позднее']);
             }
         }
@@ -73,7 +76,7 @@ class APIOrderController extends Controller {
 
         return response()->json([
             'order' => $order,
-            'user'  => $request->user('api')
+            'user' => $request->user('api')
         ]);
     }
 
@@ -81,28 +84,29 @@ class APIOrderController extends Controller {
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters) - 1;
-        
+
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength)];
         }
-        
+
         return $randomString;
     }
-    
 
-    public function fillOrder(OrderFillRequest $request, $id, $hash) {
+
+    public function fillOrder(OrderFillRequest $request, $id, $hash)
+    {
 
         $user = $request->user('api');
-        $order = Order::where('id',$id)
+        $order = Order::where('id', $id)
             ->with('orderItems')
-            ->where('hash',$hash)
+            ->where('hash', $hash)
             ->first();
 
-        if(!$order) {
+        if (!$order) {
             abort(404);
         }
-        if($order->paid) {
+        if ($order->paid) {
             return response()->json(['error' => "Заказ уже оплачен"]);
         }
 
@@ -110,37 +114,38 @@ class APIOrderController extends Controller {
 
         $order->update([
             // 'name'       => $request->name,
-            'email'      => $request->email,
-            'phone'      => $request->phone,
-            'user_id'    => $user ? $user->id : null,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'user_id' => $user ? $user->id : null,
             'pay_system' => $pay_system,
         ]);
 
-        if($user) {
+        if ($user) {
             $user->update([
-                'name'  => $request->name,
+                'name' => $request->name,
                 'phone' => $request->phone,
             ]);
         }
 
-        if($user && $user->id == 1) {
+        if ($user && $user->id == 1) {
             $order->successfullyPaid($order->price);
             return response()->json(['success' => 1]);
         }
 
-        if($pay_system == 'card') { // cloud payment
+        if ($pay_system == 'card') { // cloud payment
             return response()->json(['success' => 1]);
         }
 
         return response()->json(['success' => 0]);
     }
 
-    public function cancelOrder(Request $request, $id, $hash) {
-        $order = Order::where('id',$id)
+    public function cancelOrder(Request $request, $id, $hash)
+    {
+        $order = Order::where('id', $id)
             ->with('orderItems')
-            ->where('hash',$hash)
+            ->where('hash', $hash)
             ->first();
-        if($order && !$order->paid) {
+        if ($order && !$order->paid) {
             $order->delete();
         }
         return response()->json(true);
@@ -148,18 +153,26 @@ class APIOrderController extends Controller {
 
     public function getAboutTicket(Request $request, $code)
     {
-        $order = OrderItem::where('barcode', $code)
+        $orderItem = OrderItem::where('barcode', $code)
             ->with('order')
             ->with('timetable')
             ->with('section')
             ->with('section.scheme')
             ->with('timetable.event')
             ->with('timetable.venue')->first();
-        if($order)
-        {
+        $order = Order::where('id', $orderItem->order_id)->first();
+        if ($order) {
+            if ($order->confirmed) {
+                return response()->json([
+                    'success' => false,
+                    'data' => '',
+                    'msg' => 'Билет проверен',
+                ]);
+            }
             return response()->json([
                 'success' => true,
-                'data' => $order
+                'data' => $orderItem,
+                'msg' => 'Билет не проверен'
             ]);
         }
         return response()->json([
@@ -170,28 +183,27 @@ class APIOrderController extends Controller {
 
     public function ticketChecked($code)
     {
-        
+
         $orderItem = OrderItem::where('barcode', $code)->first();
         $order = Order::where('id', $orderItem->order_id)->first();
-        if($order)
-        {
-            if($order->confirmed)
-            {
+        if ($order) {
+            if ($order->confirmed) {
                 return response()->json([
                     'success' => false,
-                    'data' => 'Билет был подтвержден'
+                    'data' => '',
+                    'msg' => 'Билет был проверен',
                 ]);
             }
             $order->confirmed = 1;
             $order->save();
             return response()->json([
                 'success' => true,
-                'data' => 'Билет подтвержден'
+                'data' => 'Билет проверен'
             ]);
         }
         return response()->json([
             'success' => false,
-            'data' => 'Билет не найден'
+            'data' => 'Билет недействителен'
         ]);
     }
 

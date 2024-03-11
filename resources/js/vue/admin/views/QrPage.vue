@@ -77,26 +77,21 @@ export default {
 </script> -->
   
 
-
-
 <template>
   <div class="container">
-    <h1>Qr scaner</h1>
-    <div style="width:500px" id="qr_code_scanner"></div>
-    <div v-if="buttonCheck">
+    <h1>QR Scanner</h1>
+    <div class="qr-code-container" id="qr_code_scanner"></div>
+    <div v-if="buttonCheck" class="ticket-details">
       <p>{{ title }}</p>
       <p>Дата и время: {{ datetime }}</p>
-      <p>Ряд: {{ row }}, место {{ seat }}</p>
+      <p>Ряд: {{ row }}, место: {{ seat }}</p>
       <p>Цена: {{ price }}</p>
-      <button @click="successTicket">Подтвержден</button>
+      <button @click="successTicket">Подтвердить</button>
     </div>
-    <p>{{msg}}</p>
-
-    <div style="width:300px">
-      <!-- <v-zxing @decode="onDecode" /> -->
-    </div>
+    <p>{{ msg }}</p>
   </div>
 </template>
+
 <script>
 import { Html5Qrcode } from 'html5-qrcode'
 export default {
@@ -114,22 +109,21 @@ export default {
   },
 
   methods: {
-    successTicket()
-    {
+    successTicket() {
       console.log('checked')
       axios.post(`/api/order/${this.result}/check`).then(res => {
         console.log(res.data.data)
-        if(res.data.success){
+        if (res.data.success) {
           this.row = '',
           this.seat = '',
           this.price = '',
           this.datetime = '',
           this.title = '',
           this.buttonCheck = false,
-          this.msg = res.data.data
+          this.msg = res.data.msg
         }
-        else{
-          this.msg = res.data.data
+        else {
+          this.msg = res.data.msg
         }
       })
     },
@@ -160,7 +154,7 @@ export default {
         this.title = res.data.data.timetable.event.title.ru
         this.datetime = res.data.data.timetable.formatted_date
         this.buttonCheck = true
-        this.msg
+        this.msg = res.data.msg
       })
     }
 
@@ -170,3 +164,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+  margin: 20px;
+}
+
+.qr-code-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.ticket-details {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.ticket-details button {
+  margin-top: 10px;
+}
+</style>

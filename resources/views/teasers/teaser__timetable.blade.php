@@ -15,7 +15,7 @@
             <div class="timetable__venue">{{ $d->venue->title }}</div>
         </div>
         <div class="col-md-auto order-md-2 order-1">
-            <a class="btn btn-dark" href="https://teatr.kz/widget#/{{ $d->event_id }}/{{ $d->id }}">Купить билет</a>
+            <a class="btn btn-dark" href="https://teatr.kz/new_widget#/{{ $d->event_id }}/{{ $d->id }}">Купить билет</a>
         </div>
     </div>
 </div>

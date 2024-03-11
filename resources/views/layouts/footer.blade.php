@@ -63,9 +63,7 @@ $networks = ['instagram', 'facebook', 'whatsapp', 'telegram'];
             <div class="col-md-auto col-12 mt-md-0 mt-2 text-md-left text-center">
                 <img class="d-inline-block align-middle footer__visa" src="/images/visa.svg" alt="visa" title="visa"/>
                 <img class="d-inline-block align-middle ml-2 footer__mastercard" src="/images/mastercard.svg" alt="mastercard" title="mastercard"/>
-                <a class="d-inline-block align-middle ml-md-5 ml-3 footer__developer" href="https://offlime.kz">
-                    <img src="/images/offlime.svg" alt="offlime" title="offlime"/>
-                </a>
+                
             </div>
         </div>
     </div>

@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <h4 class="h4">Выберите способ оплаты</h4>
+            <!-- <h4 class="h4">Выберите способ оплаты</h4>
             <div class="row mb-3">
                 <div class="col-md-4 card-parent">
                     <div class="card">
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -245,7 +245,7 @@ export default {
             let order = this.order
             console.log('asd')
             window.noty('Спасибо!', 'Успешно выдано - билеты будут отправлены Вам на указанный email.');
-            axios.get(`/admin/order/${this.order.id}/ticket/withoutpay/send`).then(res => {
+            axios.post(`/admin/order/${this.order.id}/ticket/withoutpay/send`).then(res => {
                 console.log('success')
             })
             setTimeout(() => {

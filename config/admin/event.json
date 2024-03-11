@@ -10,7 +10,7 @@
     "delete": true,
     "modal": "modal-xl",
     "tabs": ["general", "ru", "kz"],
-    "with": ["category", "ticketDesign", "cast"],
+    "with": ["category", "ticketDesign", "cast", "timetables"],
     "additional_links": [
         {"title": "<i class='ti-eye grey-color' data-toggle='tooltip' title='На страницу события'></i>", "url": "/new_widget#/%id%"},
         {"title": "<i class='ti-game spaceduck-widget grey-color' data-event-id='%id%' data-toggle='tooltip' title='Запустить виджет'></i>"},

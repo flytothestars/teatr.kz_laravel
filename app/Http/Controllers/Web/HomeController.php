@@ -40,8 +40,7 @@ class HomeController extends Controller {
 //        }
         $user = Auth::user();
         $query = Order::where('id',$order_id)
-            ->where('hash',$hash)
-            ->where('paid',1);
+            ->where('hash',$hash);
 //        if($user->role == 'organizator') {
 //            $query->whereIn('timetable_id',$user->timetableIds());
 //        }

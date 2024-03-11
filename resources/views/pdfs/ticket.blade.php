@@ -21,7 +21,7 @@
 
         <img class="position-absolute" style="left: 119px; top: 140px; width: 250px;" {{--
             src="{{ public_path('images/logo.png') }}" />--}}
-        src="{{ public_path($event->imagePrimarySrc('teaser')) }}"/>
+        src="{{ public_path($event->imagePrimarySrc('main')) }}"/>
 
         @if($design->title_exists)
         <h1 class="position-absolute"

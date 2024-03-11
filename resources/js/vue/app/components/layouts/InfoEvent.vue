@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col">
                 <div class="event__image">
-                    <img  style="width: 140px;height: 181px" src="" />
+                    <img style="width: 140px;height: 181px" :src="getEventTeaserUrl()" />
                 </div>
             </div>
             <div class="col-sm-9">
@@ -20,8 +20,8 @@
                     <div class="event__place row">
                         <img class="img-info mx-3" src="../../../../../img/Pin.png" alt="" />
                         <p class="h5 font-weight-light">
-                            Место проведения: <a class="link-geo"
-                                href="#">{{ venue.title.ru }},{{ venue.title.address }}</a>
+                            Место проведения: <a class="link-geo" href="#">{{ venue.title.ru }},{{ venue.title.address
+                                }}</a>
                         </p>
                     </div>
                     <div class="event__price row">
@@ -59,6 +59,9 @@ export default {
         };
     },
     methods: {
+        getEventTeaserUrl() {
+            return this.timetable.event.teaser.replace('teaser', 'main');
+        },
         stepClicked(step) {
             if (this.step == 3) {
                 return;

@@ -174,10 +174,10 @@ export default {
                         };
                         this.$store.commit("updateCart", { sign, ticket });
                     });
-                    this.form.name = order.name;
+                    // this.form.name = order.name;
                     this.form.email = order.email;
                     this.form.phone = order.phone;
-                    if (!order.name) {
+                    if (!order.email) {
                         this.populateFromUser();
                     }
                     this.launchTimer();
@@ -185,7 +185,7 @@ export default {
         },
         populateFromUser() {
             if (this.user) {
-                this.form.name = this.user.name;
+                // this.form.name = this.user.name;
                 this.form.email = this.user.email;
                 this.form.phone = this.user.phone;
             }
@@ -245,7 +245,7 @@ export default {
             let order = this.order
             console.log('asd')
             window.noty('Спасибо!', 'Успешно выдано - билеты будут отправлены Вам на указанный email.');
-            axios.post(`/admin/order/${this.order.id}/ticket/withoutpay/send`).then(res => {
+            axios.get(`/admin/order/${this.order.id}/ticket/withoutpay/send`).then(res => {
                 console.log('success')
             })
             setTimeout(() => {

@@ -132,6 +132,7 @@ export default {
         seconds() {
             return String(this.checkouttime % 60).padStart(2, "0");
         }
+        
     },
     created() {
         this.$store.commit("setStep", 3);
@@ -142,6 +143,7 @@ export default {
         this.populateFromUser();
         this.phone = this.userphone
         this.email = this.useremail
+        console.log(this.phone)
         this.launchTimer();
     },
     methods: {
@@ -174,10 +176,10 @@ export default {
                         };
                         this.$store.commit("updateCart", { sign, ticket });
                     });
-                    this.form.name = order.name;
+                    // this.form.name = order.name;
                     this.form.email = this.useremail;
                     this.form.phone = this.userphone;
-                    if (!order.name) {
+                    if (!order.email) {
                         this.populateFromUser();
                     }
                     this.launchTimer();
@@ -185,7 +187,7 @@ export default {
         },
         populateFromUser() {
             if (this.user) {
-                this.form.name = this.user.name;
+                // this.form.name = this.user.name;
                 this.form.email = this.useremail;
                 this.form.phone = this.userphone;
             }

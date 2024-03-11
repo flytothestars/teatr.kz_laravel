@@ -94,7 +94,6 @@ class APIOrderController extends Controller {
     public function fillOrder(OrderFillRequest $request, $id, $hash) {
 
         $user = $request->user('api');
-
         $order = Order::where('id',$id)
             ->with('orderItems')
             ->where('hash',$hash)
@@ -110,7 +109,7 @@ class APIOrderController extends Controller {
         $pay_system = $request->pay_system;
 
         $order->update([
-            'name'       => $request->name,
+            // 'name'       => $request->name,
             'email'      => $request->email,
             'phone'      => $request->phone,
             'user_id'    => $user ? $user->id : null,

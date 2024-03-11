@@ -28,9 +28,9 @@ if(document.getElementById("vue-filtered-events")) {
             return {
                 timefilters: [
                     { id: 'all', title: "Все", type: "time"},
-                    { id: 'today', title: "Сегодня", type: "time" },
-                    { id: 'weekend', title: "На выходных", type: "time" },
-                    { id: 'month', title: "В этом месяце", type: "time" },
+                    // { id: 'today', title: "Сегодня", type: "time" },
+                    // { id: 'weekend', title: "На выходных", type: "time" },
+                    // { id: 'month', title: "В этом месяце", type: "time" },
                 ],
                 events: [],
                 venues: [],

@@ -1,6 +1,6 @@
 <div class="event teaser border h-100 @if(isset($big) && $big) big @endif">
     <a href="{{ $d->link }}">
-        <img class="event__img" src="{{ $d->imagePrimarySrc('teaser') }}" alt="{{ $d->title }}" title="{{ $d->title }}"/>
+        <img class="event__img" src="{{ public_path($d->imagePrimarySrc('teaser')) }}" alt="{{ $d->title }}" title="{{ $d->title }}"/>
     </a>
     @if($d->category)
         <div class="event__category">

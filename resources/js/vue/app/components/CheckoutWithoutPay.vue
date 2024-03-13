@@ -215,7 +215,7 @@ export default {
                         this.launchCloudPay();
                         return;
                     }
-                    window.noty("Что-то пошло не так", "error");
+                    // window.noty("Что-то пошло не так", "error");
                 });
         },
         cancelOrder() {

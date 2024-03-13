@@ -3,7 +3,7 @@
         <h1>Афиша и билеты в театры {{ $city->title }}</h1>
         <div  id="vue-filtered-events">
             <div v-cloak>
-                <div class="d-md-flex d-block home__filter_menu justify-content-start mb-4 mt-4">
+                <!-- <div class="d-md-flex d-block home__filter_menu justify-content-start mb-4 mt-4">
                     <a class="filter-a"
                        v-for="(f, find) in timefilters"
                        :class="{ active: selected.time == f.id }"
@@ -26,7 +26,7 @@
                     <a class="filter-a" @click="cancelFilters">
                         <img src="/images/close.svg" alt="Отменить" title="Отменить"/>
                     </a>
-                </div>
+                </div> -->
                 <div class="row" id="dynamic-afisha">
                     @include('content.home.home__events_dynamic', compact('events'))
                 </div>

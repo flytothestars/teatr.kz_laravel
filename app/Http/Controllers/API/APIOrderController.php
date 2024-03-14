@@ -96,7 +96,6 @@ class APIOrderController extends Controller
 
     public function fillOrder(OrderFillRequest $request, $id, $hash)
     {
-
         $user = $request->user('api');
         $order = Order::where('id', $id)
             ->with('orderItems')
@@ -116,7 +115,7 @@ class APIOrderController extends Controller
             // 'name'       => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'user_id' => $user ? $user->id : null,
+            'user_id' => null,
             'pay_system' => $pay_system,
         ]);
 

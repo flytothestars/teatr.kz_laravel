@@ -136,14 +136,14 @@ export default {
         
     },
     created() {
+        this.phone = this.userphone
+        this.email = this.useremail
         this.$store.commit("setStep", 3);
         if (!this.order) {
             this.loadOrder();
         }
         EventBus.$on("fillOrder", this.orderFill);
         this.populateFromUser();
-        this.phone = this.userphone
-        this.email = this.useremail
         this.dividedDateTime();
         console.log(this.phone)
         this.launchTimer();
@@ -186,6 +186,7 @@ export default {
                     // this.form.name = order.name;
                     this.form.email = this.useremail;
                     this.form.phone = this.userphone;
+                    console.log(this.useremail)
                     if (!order.email) {
                         this.populateFromUser();
                     }
@@ -193,11 +194,10 @@ export default {
                 });
         },
         populateFromUser() {
-            if (this.user) {
                 // this.form.name = this.user.name;
                 this.form.email = this.useremail;
                 this.form.phone = this.userphone;
-            }
+            
         },
         orderFill() {
             if (this.order.pay_url) {
@@ -322,10 +322,11 @@ export default {
 
 <style scoped lang="scss">
 
+
 .new-ticket {
     display: flex;
-  margin-right: -15px;
-  margin-left: -15px;
+    margin-right: -15px;
+    margin-left: -15px;
     .ticket {
         border: 1px solid #e7e8ed;
         border-radius: 16px;
@@ -354,6 +355,9 @@ export default {
                 }
             }
         }
+    }
+    @media (max-width: 768px){
+        display:block;                
     }
 }
 

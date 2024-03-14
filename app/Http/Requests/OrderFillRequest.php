@@ -24,7 +24,7 @@ class OrderFillRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:255',
+            'email' => 'required',
             'phone' => 'required',
             'pay_system' => 'required',
 //            'order_id' => 'required'

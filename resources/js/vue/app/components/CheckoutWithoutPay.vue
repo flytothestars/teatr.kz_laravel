@@ -50,16 +50,17 @@
                 </div>
             </div> -->
 
-            <div class="row new-ticket my-4">
+            <div class="new-ticket my-4">
                 <div class="col-md-3 text-center ticket ticket__left">
-                    <p class="h2">20:00</p>
-                    <p class="h5 font-weight-light">25 мар.</p>
+                    <p class="h2">{{ time_front }}</p>
+                    <p class="h5 font-weight-light">{{ date_front }}</p>
                 </div>
                 <div class="col-md-9 ticket ticket__right">
-                    <div class="h5 mt-3">Золотой квадрат</div>
+                    <div class="h5 mt-3">{{ timetable.event.title.ru }}</div>
                     <div class="row align-items-center">
                         <img class="ml-3" src="../../../../img/Pin.png" alt="" />
-                        <p class="mb-0 ml-3 font-weight-light">Место проведения: <a class="mark-link" href="#">пр.Абая 43</a></p>
+                        <p class="mb-0 ml-3 font-weight-light">Место проведения: <a class="mark-link" href="#">
+                                </a></p>
                     </div>
                     <div class="row my-2">
                         <span class="mark ml-3 font-weight-light">0+</span>
@@ -71,7 +72,7 @@
                             <div class="mark-big ml-3 font-weight-light">7 ряд, 1 место</div>
                         </div>
                         <div class="col-md-4 text-center">
-                            <p class="h2 mark-price ">15 000тг</p>
+                            <p class="h2 mark-price ">{{ order.price }} тг</p>
                         </div>
                     </div>
                 </div>
@@ -132,19 +133,27 @@ export default {
         seconds() {
             return String(this.checkouttime % 60).padStart(2, "0");
         }
+        
     },
     created() {
+        this.phone = this.userphone
+        this.email = this.useremail
         this.$store.commit("setStep", 3);
         if (!this.order) {
             this.loadOrder();
         }
         EventBus.$on("fillOrder", this.orderFill);
         this.populateFromUser();
-        this.phone = this.userphone
-        this.email = this.useremail
+        this.dividedDateTime();
+        console.log(this.phone)
         this.launchTimer();
     },
     methods: {
+        dividedDateTime(){
+            const [date, time] = this.timetable.formatted_date.split(", ");
+            this.date_front = date;
+            this.time_front = time;
+        },
         launchTimer() {
             if (this.order) {
                 this.countdown();
@@ -175,8 +184,9 @@ export default {
                         this.$store.commit("updateCart", { sign, ticket });
                     });
                     // this.form.name = order.name;
-                    this.form.email = order.email;
-                    this.form.phone = order.phone;
+                    this.form.email = this.useremail;
+                    this.form.phone = this.userphone;
+                    console.log(this.useremail)
                     if (!order.email) {
                         this.populateFromUser();
                     }
@@ -184,11 +194,10 @@ export default {
                 });
         },
         populateFromUser() {
-            if (this.user) {
                 // this.form.name = this.user.name;
-                this.form.email = this.user.email;
-                this.form.phone = this.user.phone;
-            }
+                this.form.email = this.useremail;
+                this.form.phone = this.userphone;
+            
         },
         orderFill() {
             if (this.order.pay_url) {
@@ -255,6 +264,8 @@ export default {
     },
     data() {
         return {
+            time_front: "",
+            date_front: "",
             form: {
                 name: "",
                 email: "",
@@ -275,7 +286,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+
 .new-ticket {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
     .ticket {
         border: 1px solid #e7e8ed;
         border-radius: 16px;
@@ -304,6 +320,9 @@ export default {
                 }
             }
         }
+    }
+    @media (max-width: 768px){
+        display:block;                
     }
 }
 

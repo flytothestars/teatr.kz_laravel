@@ -52,7 +52,7 @@ class TicketsController extends Controller
 
 
     public function sendTickets($id) {
-        $order = Order::where('id',$id)->where('paid',1)->first();
+        $order = Order::where('id',$id)->first();
         if(!$order) {
             abort(404);
         }

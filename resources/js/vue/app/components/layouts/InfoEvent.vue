@@ -1,6 +1,6 @@
 <template>
     <div v-if="step != 3" class="info">
-        <div class="row">
+        <div class="new_row">
             <div class="col">
                 <div class="event__image">
                     <img style="width: 140px;height: 181px" :src="getEventTeaserUrl()" />
@@ -110,10 +110,38 @@ export default {
     }
 }
 
-.event__name {
-    @media (max-width: 575px) {
+.new_row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+@media (max-width: 575px) {
+    .new_row {
+        flex-wrap: wrap;
+    }
+    .event__time {
+        p {
+            size: 8px;
+        }
+    }
+
+    .event__name {
         p {
             text-align: center;
+            size: 8px;
+        }
+    }
+
+    .event__place {
+        p {
+            size: 8px;
+        }
+
+        a {
+            size: 8px;
+
         }
     }
 }

@@ -50,16 +50,17 @@
                 </div>
             </div> -->
 
-            <div class="row new-ticket my-4">
+            <div class="new-ticket my-4">
                 <div class="col-md-3 text-center ticket ticket__left">
-                    <p class="h2">20:00</p>
-                    <p class="h5 font-weight-light">25 мар.</p>
+                    <p class="h2">{{ time_front }}</p>
+                    <p class="h5 font-weight-light">{{ date_front }}</p>
                 </div>
                 <div class="col-md-9 ticket ticket__right">
-                    <div class="h5 mt-3">Золотой квадрат</div>
+                    <div class="h5 mt-3">{{ timetable.event.title.ru }}</div>
                     <div class="row align-items-center">
                         <img class="ml-3" src="../../../../img/Pin.png" alt="" />
-                        <p class="mb-0 ml-3 font-weight-light">Место проведения: <a class="mark-link" href="#">пр.Абая 43</a></p>
+                        <p class="mb-0 ml-3 font-weight-light">Место проведения: <a class="mark-link" href="#">
+                                </a></p>
                     </div>
                     <div class="row my-2">
                         <span class="mark ml-3 font-weight-light">0+</span>
@@ -71,7 +72,7 @@
                             <div class="mark-big ml-3 font-weight-light">7 ряд, 1 место</div>
                         </div>
                         <div class="col-md-4 text-center">
-                            <p class="h2 mark-price ">15 000тг</p>
+                            <p class="h2 mark-price ">{{ order.price }} тг</p>
                         </div>
                     </div>
                 </div>
@@ -143,10 +144,16 @@ export default {
         this.populateFromUser();
         this.phone = this.userphone
         this.email = this.useremail
+        this.dividedDateTime();
         console.log(this.phone)
         this.launchTimer();
     },
     methods: {
+        dividedDateTime(){
+            const [date, time] = this.timetable.formatted_date.split(", ");
+            this.date_front = date;
+            this.time_front = time;
+        },
         launchTimer() {
             if (this.order) {
                 this.countdown();
@@ -292,6 +299,8 @@ export default {
     },
     data() {
         return {
+            time_front: "",
+            date_front: "",
             form: {
                 name: "",
                 email: "",
@@ -312,7 +321,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .new-ticket {
+    display: flex;
+  margin-right: -15px;
+  margin-left: -15px;
     .ticket {
         border: 1px solid #e7e8ed;
         border-radius: 16px;

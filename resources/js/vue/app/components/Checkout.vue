@@ -59,35 +59,38 @@
                     <div class="h5 mt-3">{{ timetable.event.title.ru }}</div>
                     <div class="row align-items-center">
                         <img class="ml-3" src="../../../../img/Pin.png" alt="" />
-                        <p class="mb-0 ml-3 font-weight-light">Место проведения: <a class="mark-link" href="#">
-                                </a></p>
+                        <p class="mb-0 ml-3 font-weight-light">Место проведения: 
+                            <a class="mark-link" href="#">{{ venue.title.ru }},{{ venue.title.address}}</a>
+                        </p>
                     </div>
                     <div class="row my-2">
                         <span class="mark ml-3 font-weight-light">0+</span>
                         <span class="mark ml-2 font-weight-light">РУС</span>
                     </div>
                     <div class="row justify-content-between text-center">
+                        <template v-for="item in cart">
                         <div class="row col-md-8 block-mark">
-                            <div class="mark-big  font-weight-light">Партер</div>
-                            <div class="mark-big ml-3 font-weight-light">7 ряд, 1 место</div>
-                        </div>
+                            <div class="mark-big  font-weight-light">{{ item.section_name.ru }}</div>
+                                <div class="mark-big ml-3 font-weight-light">Ряд: {{ item.row }}, {{ item.seat }} место</div>
+                            </div>
+                        </template>
                         <div class="col-md-4 text-center">
                             <p class="h2 mark-price ">{{ order.price }} тг</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <h4 class="h4">Выберите способ оплаты</h4>
+            <h4 class="h4">Выберите способ оплаты</h4>
             <div class="row mb-3">
                 <div class="col-md-4 card-parent">
                     <div class="card">
                         <div class="card-body">
-                            <img class="mb-5" src="../../../../img/image 17.png" alt="">
-                            <p class="card-text">Оплатить через каспи</p>
+                            <img class="mb-5" src="../../../../img/cloudp.png" alt="">
+                            <p class="card-text">Cloud P</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 card-parent">
+                <!-- <div class="col-md-4 card-parent">
                     <div class="card">
                         <div class="card-body">
                             <img class="mb-5" src="../../../../img/image 18.png" alt="">
@@ -102,8 +105,8 @@
                             <p class="card-text">Карты Visa/MasterCard</p>
                         </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
 
         </div>
     </div>
@@ -126,6 +129,7 @@ export default {
             "checkouttime",
             "userphone",
             "useremail",
+            "venue",
         ]),
         minutes() {
             return String(Math.floor(this.checkouttime / 60)).padStart(2, "0");

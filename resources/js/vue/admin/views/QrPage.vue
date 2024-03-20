@@ -86,7 +86,7 @@ export default {
       <p>Дата и время: {{ datetime }}</p>
       <p>Ряд: {{ row }}, место: {{ seat }}</p>
       <p>Цена: {{ price }}</p>
-      <button @click="successTicket">Подтвердить</button>
+      <button class="btn btn-primary" @click="successTicket">Подтвердить</button>
     </div>
     <p>{{ msg }}</p>
   </div>
@@ -179,6 +179,9 @@ export default {
 .ticket-details {
   margin-top: 20px;
   text-align: center;
+}
+.ticket-details p{
+  size: 16px;
 }
 
 .ticket-details button {

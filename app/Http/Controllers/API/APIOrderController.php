@@ -127,7 +127,6 @@ class APIOrderController extends Controller
         }
 
         // if ($user && $user->id == 1) {
-            $order->successfullyPaid($order->price);
             // return response()->json(['success' => 1]);
         // }
 

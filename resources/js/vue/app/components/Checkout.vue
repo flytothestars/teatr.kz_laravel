@@ -142,6 +142,7 @@ export default {
         if (!this.order) {
             this.loadOrder();
         }
+        EventBus.$on("fillOrder", this.orderFill);
         this.populateFromUser();
         this.dividedDateTime();
         console.log(this.phone)
@@ -278,13 +279,11 @@ export default {
                         "Спасибо!",
                         "Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email."
                     );
-                    
-                    EventBus.$on("fillOrder", this.orderFill);
-                    // axios
-                    //     .get(`/admin/order/${this.order.id}/ticket/send`)
-                    //     .then(res => {
-                    //         console.log("success");
-                    //     });
+                    axios
+                        .get(`/admin/order/${this.order.id}/ticket/send`)
+                        .then(res => {
+                            console.log("success");
+                        });
                     setTimeout(() => {
                         window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
                     }, 500);

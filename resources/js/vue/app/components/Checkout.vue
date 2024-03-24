@@ -263,14 +263,22 @@ export default {
             })
             widget.pay('charge',
                 { //options
-                    publicId: 'test_api_00000000000000000000002', //id из личного кабинета
-                    description: 'Оплата товаров в example.com', //назначение
-                    amount: 10, //сумма
+                    publicId: 'pk_3e80657de67d651fc26d5c23b4bc7', //id из личного кабинета
+                    description: "Оплата за " +
+                        this.timetable.event.title.ru +
+                        " (" +
+                        this.timetable.formatted_date +
+                        "), заказ " +
+                        this.order.id, //назначение
+                    amount: this.order.price, //сумма
                     currency: 'KZT', //валюта
-                    accountId: 'user@example.com', //идентификатор плательщика (необязательно)
-                    invoiceId: '1234567', //номер заказа  (необязательно)
+                    accountId: this.form.email, //идентификатор плательщика (необязательно)
+                    invoiceId: this.order.id, //номер заказа  (необязательно)
                     skin: "mini", //дизайн виджета (необязательно)
-                    autoClose: 3
+                    autoClose: 3,
+                    data: {
+                        hash: this.order.hash
+                    }
                 }, {
                 onSuccess: function (options) { // success
                     //действие при успешной оплате

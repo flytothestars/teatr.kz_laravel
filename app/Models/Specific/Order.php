@@ -209,9 +209,9 @@ class Order extends Model {
                 ->update(['sold' => 1]);
         }
 
-        if($send && !$this->sent) {
-            $this->sendByEmail();
-        }
+        // if($send && !$this->sent) {
+        //     $this->sendByEmail();
+        // }
         return true;
 
     }

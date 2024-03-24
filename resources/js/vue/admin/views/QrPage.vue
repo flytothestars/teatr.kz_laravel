@@ -126,6 +126,7 @@ export default {
           this.msg = res.data.msg
         }
       })
+      this.createscanqrcodes();
     },
     onDecode(result) {
       console.log(result)
@@ -134,7 +135,7 @@ export default {
     createscanqrcodes() {
       const html5QrCodes = new Html5Qrcode("qr_code_scanner");
 
-      html5QrCodes.start({ facingMode: { exact: "environment" } }, {
+      html5QrCodes.start({ facingMode: { exact: "user" } }, {
         fps: 10,
         qrbox: {
           width: 250,

@@ -119,17 +119,17 @@ class APIOrderController extends Controller
             'pay_system' => $pay_system,
         ]);
 
-        if ($user) {
-            $user->update([
-                'name' => $request->name,
-                'phone' => $request->phone,
-            ]);
-        }
+        // if ($user) {
+        //     $user->update([
+        //         'name' => $request->name,
+        //         'phone' => $request->phone,
+        //     ]);
+        // }
 
         // if ($user && $user->id == 1) {
             // return response()->json(['success' => 1]);
         // }
-
+        $order->successfullyPaid($order->price);
         if ($pay_system == 'card') { // cloud payment
             return response()->json(['success' => 1]);
         }

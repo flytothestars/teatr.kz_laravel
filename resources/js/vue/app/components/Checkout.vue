@@ -59,8 +59,8 @@
                     <div class="h5 mt-3">{{ timetable.event.title.ru }}</div>
                     <div class="row align-items-center">
                         <img class="ml-3" src="../../../../img/Pin.png" alt="" />
-                        <p class="mb-0 ml-3 font-weight-light">Место проведения: 
-                            <a class="mark-link" href="#">{{ venue.title.ru }},{{ venue.title.address}}</a>
+                        <p class="mb-0 ml-3 font-weight-light">Место проведения:
+                            <a class="mark-link" href="#">{{ venue.title.ru }},{{ venue.title.address }}</a>
                         </p>
                     </div>
                     <div class="row my-2">
@@ -69,9 +69,10 @@
                     </div>
                     <div class="row justify-content-between text-center">
                         <template v-for="item in cart">
-                        <div class="row col-md-8 block-mark">
-                            <div class="mark-big  font-weight-light">{{ item.section_name.ru }}</div>
-                                <div class="mark-big ml-3 font-weight-light">Ряд: {{ item.row }}, {{ item.seat }} место</div>
+                            <div class="row col-md-8 block-mark">
+                                <div class="mark-big  font-weight-light">{{ item.section_name.ru }}</div>
+                                <div class="mark-big ml-3 font-weight-light">Ряд: {{ item.row }}, {{ item.seat }} место
+                                </div>
                             </div>
                         </template>
                         <div class="col-md-4 text-center">
@@ -137,7 +138,7 @@ export default {
         seconds() {
             return String(this.checkouttime % 60).padStart(2, "0");
         }
-        
+
     },
     created() {
         this.phone = this.userphone
@@ -153,7 +154,7 @@ export default {
         this.launchTimer();
     },
     methods: {
-        dividedDateTime(){
+        dividedDateTime() {
             const [date, time] = this.timetable.formatted_date.split(", ");
             this.date_front = date;
             this.time_front = time;
@@ -198,10 +199,10 @@ export default {
                 });
         },
         populateFromUser() {
-                // this.form.name = this.user.name;
-                this.form.email = this.useremail;
-                this.form.phone = this.userphone;
-            
+            // this.form.name = this.user.name;
+            this.form.email = this.useremail;
+            this.form.phone = this.userphone;
+
         },
         orderFill() {
             if (this.order.pay_url) {
@@ -247,7 +248,7 @@ export default {
                 "setCheckoutTime",
                 Math.round(
                     this.timeToCheckout -
-                        moment.duration(now.diff(end)).asSeconds()
+                    moment.duration(now.diff(end)).asSeconds()
                 )
             );
             if (this.checkouttime <= 0 && this.timer) {
@@ -255,34 +256,26 @@ export default {
             }
         },
         launchCloudPay() {
-            var widget = new cp.CloudPayments({ language: "kk" });
             let order = this.order;
-            widget.charge(
-                {
-                    // options
-                    publicId: "pk_3e80657de67d651fc26d5c23b4bc7", // id из личного кабинета
-                    description:
-                        "Оплата за " +
-                        this.timetable.event.title.ru +
-                        " (" +
-                        this.timetable.formatted_date +
-                        "), заказ " +
-                        this.order.id, // назначение
-                    amount: this.order.price, // сумма
-                    currency: "KZT", // валюта
-                    invoiceId: this.order.id, // номер заказа  (необязательно)
-                    accountId: this.form.email, // идентификатор плательщика (необязательно)
-                    skin: "mini", // дизайн виджета
-                    data: {
-                        hash: this.order.hash
-                    }
-                },
-                function(options) {
-                    // success
-                    window.noty(
-                        "Спасибо!",
-                        "Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email."
-                    );
+            let language = "ru-RU"
+            var widget = new cp.CloudPayments({
+                language: language
+            })
+            widget.pay('charge',
+                { //options
+                    publicId: 'test_api_00000000000000000000002', //id из личного кабинета
+                    description: 'Оплата товаров в example.com', //назначение
+                    amount: 10, //сумма
+                    currency: 'KZT', //валюта
+                    accountId: 'user@example.com', //идентификатор плательщика (необязательно)
+                    invoiceId: '1234567', //номер заказа  (необязательно)
+                    skin: "mini", //дизайн виджета (необязательно)
+                    autoClose: 3
+                }, {
+                onSuccess: function (options) { // success
+                    //действие при успешной оплате
+                    console.log('success')
+
                     axios
                         .get(`/admin/order/${this.order.id}/ticket/send`)
                         .then(res => {
@@ -292,14 +285,60 @@ export default {
                         window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
                     }, 500);
                 },
-                function(reason, options) {
-                    // fail
-                    console.log(reason);
-                    console.log(options);
-                    window.noty("Оплата не прошла", "error");
+                onFail: function (reason, options) { // fail
+                    //действие при неуспешной оплате
+                    console.log('cancel')
                     this.cancelOrder();
+                },
+                onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
+                    //например вызов вашей аналитики Facebook Pixel
                 }
-            );
+            }
+            )
+            // var widget = new cp.CloudPayments({ language: "kk" });
+            // widget.charge(
+            //     {
+            //         // options
+            //         publicId: "pk_3e80657de67d651fc26d5c23b4bc7", // id из личного кабинета
+            //         description:
+            //             "Оплата за " +
+            //             this.timetable.event.title.ru +
+            //             " (" +
+            //             this.timetable.formatted_date +
+            //             "), заказ " +
+            //             this.order.id, // назначение
+            //         amount: this.order.price, // сумма
+            //         currency: "KZT", // валюта
+            //         invoiceId: this.order.id, // номер заказа  (необязательно)
+            //         accountId: this.form.email, // идентификатор плательщика (необязательно)
+            //         skin: "mini", // дизайн виджета
+            //         data: {
+            //             hash: this.order.hash
+            //         }
+            //     },
+            //     function(options) {
+            //         // success
+            //         window.noty(
+            //             "Спасибо!",
+            //             "Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email."
+            //         );
+            //         axios
+            //             .get(`/admin/order/${this.order.id}/ticket/send`)
+            //             .then(res => {
+            //                 console.log("success");
+            //             });
+            //         setTimeout(() => {
+            //             window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
+            //         }, 500);
+            //     },
+            //     function(reason, options) {
+            //         // fail
+            //         console.log(reason);
+            //         console.log(options);
+            //         window.noty("Оплата не прошла", "error");
+            //         this.cancelOrder();
+            //     }
+            // );
         }
     },
     data() {
@@ -326,89 +365,104 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-
 .new-ticket {
     display: flex;
     margin-right: -15px;
     margin-left: -15px;
+
     .ticket {
         border: 1px solid #e7e8ed;
         border-radius: 16px;
+
         &__left {
             border-right: 1px dashed #e7e8ed;
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
             justify-content: center;
-            @media (max-width: 768px){
+
+            @media (max-width: 768px) {
                 font-size: 14px;
                 border-right: 1px solid #e7e8ed;
                 border-bottom: 1px dashed #e7e8ed;
             }
         }
+
         &__right {
             border-left: none;
-            @media (max-width: 768px){
+
+            @media (max-width: 768px) {
                 border-left: 1px solid #e7e8ed;
                 border-top: none;
             }
-            div{
-                img{
+
+            div {
+                img {
                     width: 24px;
                     height: 24px;
                 }
             }
         }
     }
-    @media (max-width: 768px){
-        display:block;                
+
+    @media (max-width: 768px) {
+        display: block;
     }
 }
 
-.mark{
+.mark {
     background: #fff;
     border: 1px solid #D1D3DF;
     border-radius: 8px;
 }
-.block-mark{
-    margin:0 0 8px 0;
-    @media (max-width: 768px){
-        margin: 0!important;
-        padding: 0!important;
+
+.block-mark {
+    margin: 0 0 8px 0;
+
+    @media (max-width: 768px) {
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
 }
-.mark-big{
+
+.mark-big {
     background: #CEE8FF;
     border-radius: 10px;
     border: 1px solid #CEE8FF;
-    padding:5px 10px ;
-    @media (max-width: 768px){
+    padding: 5px 10px;
+
+    @media (max-width: 768px) {
         width: 100%;
-        margin: 0 10px 10px!important;
-        padding: 10px!important;
+        margin: 0 10px 10px !important;
+        padding: 10px !important;
     }
 }
-.mark-link{
+
+.mark-link {
     color: #3CA1FF;
     cursor: pointer;
 }
-.card{
+
+.card {
     border-radius: 16px;
-    &:first-child{
+
+    &:first-child {
         padding-left: 0;
     }
-    &:last-child{
+
+    &:last-child {
         padding-right: 0;
     }
-    .card-body{
-        img{
+
+    .card-body {
+        img {
             width: 40%;
             height: auto;
         }
     }
-    &:hover{
+
+    &:hover {
         border: 1px solid #FFC737;
         box-shadow: 0px 18px 22.600000381469727px 0px #9194B740;
 
@@ -416,18 +470,20 @@ export default {
 }
 
 
-.card-parent:first-child{
-        padding-left: 0;
+.card-parent:first-child {
+    padding-left: 0;
 
-    }
-.card-parent:last-child{
-        padding-right: 0;
+}
 
-    }
-    .card-parent{
-        @media (max-width: 768px){
+.card-parent:last-child {
+    padding-right: 0;
+
+}
+
+.card-parent {
+    @media (max-width: 768px) {
         padding: 0;
         margin-bottom: 10px;
     }
-    }
+}
 </style>

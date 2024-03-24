@@ -297,6 +297,7 @@ export default {
                     console.log(reason);
                     console.log(options);
                     window.noty("Оплата не прошла", "error");
+                    this.cancelOrder();
                 }
             );
         }

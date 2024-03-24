@@ -232,12 +232,12 @@ export default {
                 });
         },
         cancelOrder() {
-            window.loaderIcon();
             axios
                 .delete(`/api/order/${this.order.id}/${this.order.hash}`)
                 .then(res => {
                     this.$router.push("/");
                 });
+            window.loaderIcon();
         },
         countdown() {
             if (!this.order) return;

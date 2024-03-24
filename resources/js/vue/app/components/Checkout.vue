@@ -299,7 +299,7 @@ export default {
                     axios
                         .delete(`/api/order/${this.order.id}/${this.order.hash}`)
                         .then(res => {
-                            this.$router.push("cancel send to back");
+                            console.log("cancel send to back");
                         });
                 },
                 onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.

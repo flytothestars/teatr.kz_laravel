@@ -287,7 +287,7 @@ export default {
                     axios
                         .get(`/admin/order/${this.order.id}/ticket/send`)
                         .then(res => {
-                            console.log("success");
+                            console.log("success send mail");
                         });
                     setTimeout(() => {
                         window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
@@ -296,7 +296,11 @@ export default {
                 onFail: function (reason, options) { // fail
                     //действие при неуспешной оплате
                     console.log('cancel')
-                    this.cancelOrder();
+                    axios
+                        .delete(`/api/order/${this.order.id}/${this.order.hash}`)
+                        .then(res => {
+                            this.$router.push("cancel send to back");
+                        });
                 },
                 onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
                     //например вызов вашей аналитики Facebook Pixel

@@ -129,7 +129,6 @@ class APIOrderController extends Controller
         // if ($user && $user->id == 1) {
             // return response()->json(['success' => 1]);
         // }
-        $order->successfullyPaid($order->price);
         if ($pay_system == 'card') { // cloud payment
             return response()->json(['success' => 1]);
         }

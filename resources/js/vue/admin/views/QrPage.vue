@@ -53,7 +53,7 @@
   };
   </script>
    -->
- 
+
 
 
 
@@ -75,20 +75,23 @@ export default {
     },
 };
 </script> -->
-  
+
 
 <template>
   <div class="container">
-    <h1>QR Scanner</h1>
+    <h1 style="text-align: center;">QR сканер</h1>
+    <div  style="text-align: center;">
+      <button class="btn btn-primary mb-4" @click="startScanner">Начать сканирование</button>
+    </div>
     <div class="qr-code-container" id="qr_code_scanner"></div>
     <div v-if="buttonCheck" class="ticket-details">
       <p>{{ title }}</p>
       <p>Дата и время: {{ datetime }}</p>
       <p>Ряд: {{ row }}, место: {{ seat }}</p>
       <p>Цена: {{ price }}</p>
-      <button class="btn btn-primary" @click="successTicket">Подтвердить</button>
+      <button v-if="buttonSubmit" class="btn btn-primary" @click="successTicket">Подтвердить</button>
+      <p class="status" :style="paragraphStyle">{{ msg }}</p>
     </div>
-    <p>{{ msg }}</p>
   </div>
 </template>
 
@@ -104,10 +107,19 @@ export default {
       datetime: '',
       title: '',
       buttonCheck: false,
-      msg: ''
+      buttonSubmit: true,
+      msg: '',
+      qrreader: null,
     }
   },
-
+  computed: {
+    paragraphStyle() {
+      return {
+        color: this.buttonSubmit ? 'black' : 'white',
+        backgroundColor: this.buttonSubmit ? 'yellow' : 'green',
+      };
+    }
+  },
   methods: {
     successTicket() {
       console.log('checked')
@@ -115,47 +127,92 @@ export default {
         console.log(res.data.data)
         if (res.data.success) {
           this.row = '',
-          this.seat = '',
-          this.price = '',
-          this.datetime = '',
-          this.title = '',
-          this.buttonCheck = false,
-          this.msg = res.data.msg
+            this.seat = '',
+            this.price = '',
+            this.datetime = '',
+            this.title = '',
+            this.buttonCheck = false,
+            this.msg = res.data.msg
         }
         else {
           this.msg = res.data.msg
         }
       })
-      this.createscanqrcodes();
     },
-    onDecode(result) {
-      console.log(result)
-      this.result = result
+    startScanner() {
+      this.buttonCheck = false
+      this.qrreader.start(
+        { facingMode: { exact: "environment" } }, {
+          fps: 10,
+          qrbox: {
+            width: 250,
+            height: 250
+          }
+        },
+        this.onScanSuccess,
+      ).catch(console.error);
+    },
+    stopScanner() {
+      this.qrreader.stop().catch(console.error);
     },
     createscanqrcodes() {
-      const html5QrCodes = new Html5Qrcode("qr_code_scanner");
+      this.qrreader = new Html5Qrcode("qr_code_scanner");
+      // const qrConstraints = {
+      //   facingMode: "environment"
+      // };
+      // const qrConfig = {
+      //   fps: 10,
+      //   qrbox: {
+      //     width: 250,
+      //     height: 250
+      //   }
+      // };
+      // const qrOnSuccess = (decodedText, decodedResult) => {
+      //   stopScanner(); // Stop the scanner
+      //   console.log(`Message: ${decodedText}, Result: ${JSON.stringify(decodedResult)}`);
+      //   $("#barcode_search").val(decodedText); // Set the value of the barcode field
+      //   $("#update_form").trigger("submit"); // Submit form to backend
+      // };
 
-      html5QrCodes.start({ facingMode: { exact: "user" } }, {
-        fps: 10,
-        qrbox: {
-          width: 250,
-          height: 250
-        }
-      }, this.onScanSuccess)
+      // const startScanner = () => {
+      //   qrReader.start(
+      //     qrConstraints,
+      //     qrConfig,
+      //     qrOnSuccess,
+      //   ).catch(console.error);
+      // };
+
+      // const stopScanner = () => {
+      //   $("#reader").hide();
+      //   $("#product_info").show();
+      //   qrReader.stop().catch(console.error);
+      // };
+      // const html5QrCodes = new Html5Qrcode("qr_code_scanner");
+
+      // html5QrCodes.start({ facingMode: { exact: "environment" } }, {
+      //   fps: 10,
+      //   qrbox: {
+      //     width: 250,
+      //     height: 250
+      //   }
+      // }, this.onScanSuccess)
     },
 
     onScanSuccess(resultde) {
       this.result = resultde;
       console.log(this.result)
+      this.stopScanner()
       axios.post(`/api/order/${this.result}/ticket`).then(res => {
         console.log('success')
+        console.log(res.data)
         this.price = res.data.data.price
         this.row = res.data.data.row
         this.seat = res.data.data.seat
         this.title = res.data.data.timetable.event.title.ru
         this.datetime = res.data.data.timetable.formatted_date
-        this.buttonCheck = true
         this.msg = res.data.msg
+        this.buttonSubmit = res.data.success
+        this.buttonCheck = true
       })
     }
 
@@ -176,12 +233,18 @@ export default {
   max-width: 300px;
   margin: 0 auto;
 }
-
+.status {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  size: 20px;
+}
 .ticket-details {
   margin-top: 20px;
   text-align: center;
 }
-.ticket-details p{
+
+.ticket-details p {
   size: 16px;
 }
 

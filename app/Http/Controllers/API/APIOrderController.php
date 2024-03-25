@@ -162,7 +162,7 @@ class APIOrderController extends Controller
             if ($order->confirmed) {
                 return response()->json([
                     'success' => false,
-                    'data' => '',
+                    'data' => $orderItem,
                     'msg' => 'Билет проверен',
                 ]);
             }

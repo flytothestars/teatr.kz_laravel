@@ -306,7 +306,7 @@ export default {
                         console.log(reason)
                         console.log(options)
                         this.cancelOrder();
-                        window.noty("Оплата не прошла", "error");
+                        // window.noty("Оплата не прошла", "error");
                         // axios
                         //     .delete(`/api/order/${this.order.id}/${this.order.hash}`)
                         //     .then(res => {

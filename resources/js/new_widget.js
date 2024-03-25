@@ -20,6 +20,7 @@ import WidgetInit from './vue/app/components/new_widget/WidgetInit'
 import Event from './vue/app/components/new_widget/Event'
 import Timetable from './vue/app/components/new_widget/Timetable'
 import Checkout from './vue/app/components/Checkout'
+import SuccessStatus from './vue/app/components/SuccessStatus'
 
 const routes = [
     // { path: '/', redirect: '/dashboard' },
@@ -27,6 +28,7 @@ const routes = [
     { path: '/:eventid', name: 'event', component: Event },
     { path: '/:eventid/:timetableid', name: 'timetable', component: Timetable },
     { path: '/order/:id/:hash', name: 'checkout', component: Checkout },
+    { path: '/result/success', name: 'successstatus', component: SuccessStatus },
 ]
 
 const router = new VueRouter({

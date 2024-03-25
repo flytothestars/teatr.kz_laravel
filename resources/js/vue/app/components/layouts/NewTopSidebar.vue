@@ -1,5 +1,5 @@
 <template>
-    <div class="newtop-sidebar">
+    <div v-if="step != 4" class="newtop-sidebar">
         <div class="d-flex justify-content-start mt-3 pl-3">
             <div :class="{ active: step === (mind + 1) }" class="top__item" v-for="(m, mind) in menu">
                 <div  @click="stepClicked((mind + 1))">

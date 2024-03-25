@@ -1,5 +1,5 @@
 <template>
-    <div v-if="step != 3" class="info">
+    <div v-if="step < 3" class="info">
         <div class="new_row">
             <div class="col">
                 <div class="event__image">

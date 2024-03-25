@@ -32,7 +32,7 @@
         @if($design->order_exists)
         <div class="position-absolute right-img-content"
             style="@if($design->order_r) right: {{ $design->order_r }}px; @else left: {{ $design->order_l }}px; @endif top: {{ $design->order_t }}px;">
-            <b>Номер заказа: </b>{{ $ticket->articul }}
+            <p><b>Номер заказа: </b>{{ $ticket->articul }}</p>
         </div>
         @endif
         @if($design->user_exists)
@@ -44,7 +44,7 @@
         @if($design->date_exists)
         <div class="position-absolute right-img-content"
             style="@if($design->date_r) right: {{ $design->date_r }}px; @else left: {{ $design->date_l }}px; @endif top: {{ $design->date_t }}px;">
-            <b>Дата: </b>{{ dateFormat($timetable->datetime,true,true) }}
+            <p><b>Дата: </b>{{ dateFormat($timetable->datetime,true,true) }}</p>
         </div>
         @endif
         @if($design->venue_exists)
@@ -57,22 +57,22 @@
         <div class="position-absolute right-img-content"
             style="@if($design->section_r) right: {{ $design->section_r }}px; @else left: {{ $design->section_l }}px; @endif top: {{ $design->section_t }}px;">
             @if($ticket->section_id)
-            <b>Сектор: </b>{{ $ticket->section ? $ticket->section->title : 'Входной' }}
+            <p><b>Сектор: </b>{{ $ticket->section ? $ticket->section->title : 'Входной' }}</p>
             @elseif($ticket->pricegroup)
-            <b>Категория: </b>{{ $ticket->pricegroup->title }}
+            <p><b>Категория: </b>{{ $ticket->pricegroup->title }}</p>
             @endif
         </div>
         @endif
         @if($design->row_exists && $ticket->row)
         <div class="position-absolute right-img-content"
             style="@if($design->row_r) right: {{ $design->row_r }}px; @else left: {{ $design->row_l }}px; @endif top: {{ $design->row_t }}px;">
-            <b>Ряд: </b>{{ $ticket->row }}
+            <p><b>Ряд: </b>{{ $ticket->row }}</p>
         </div>
         @endif
         @if($design->seat_exists && $ticket->seat)
         <div class="position-absolute right-img-content"
             style="@if($design->seat_r) right: {{ $design->seat_r }}px; @else left: {{ $design->seat_l }}px; @endif top: {{ $design->seat_t }}px;">
-            <b>Место:</b> {{ $ticket->seat }}
+            <p><b>Место:</b> {{ $ticket->seat }}</p>
         </div>
         @endif
         {{-- @if($design->price_exists && $ticket->price)--}}
@@ -84,7 +84,7 @@
         @if($design->price_exists)
         <div class="position-absolute right-img-content"
             style="@if($design->price_r) right: {{ $design->price_r }}px; @else left: {{ $design->price_l }}px; @endif top: {{ $design->price_t }}px;">
-            <b>Стоимость:</b> {{ number_format($ticket->price,0,"."," ") }} тг
+            <p><b>Стоимость:</b> {{ number_format($ticket->price,0,"."," ") }} тг</p>
             @if($ticket->specialDiscount)
             ({{ $ticket->specialDiscount->name }})
             @elseif($ticket->pricegroup)

@@ -133,6 +133,7 @@ export default {
             this.title = '',
             this.buttonCheck = false,
             this.msg = res.data.msg
+            window.noty("Билет успешно подтвержден", "success");
         }
         else {
           this.msg = res.data.msg

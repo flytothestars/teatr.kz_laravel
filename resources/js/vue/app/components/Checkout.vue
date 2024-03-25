@@ -141,6 +141,9 @@ export default {
 
     },
     created() {
+        const script = document.createElement('script');
+        script.src = 'https://widget.cloudpayments.kz/bundles/cloudpayments.js';
+        document.body.appendChild(script);
         this.phone = this.userphone
         this.email = this.useremail
         this.$store.commit("setStep", 3);
@@ -233,12 +236,14 @@ export default {
                 });
         },
         cancelOrder() {
+            // window.loaderIcon();
+            console.log("cancel func")
             axios
                 .delete(`/api/order/${this.order.id}/${this.order.hash}`)
                 .then(res => {
-                    this.$router.push("/");
+                    console.log(res)
+                    // this.$router.push("/");
                 });
-            window.loaderIcon();
         },
         countdown() {
             if (!this.order) return;
@@ -256,62 +261,12 @@ export default {
             }
         },
         launchCloudPay() {
+            var widget = new cp.CloudPayments({ language: "kk-KZ" });
             let order = this.order;
-            // let language = "ru-RU"
-            // var widget = new cp.CloudPayments({
-            //     language: language
-            // })
-            // widget.pay('charge',
-            //     { //options
-            //         publicId: 'pk_3e80657de67d651fc26d5c23b4bc7', //id из личного кабинета
-            //         description: "Оплата за " +
-            //             this.timetable.event.title.ru +
-            //             " (" +
-            //             this.timetable.formatted_date +
-            //             "), заказ " +
-            //             this.order.id, //назначение
-            //         amount: this.order.price, //сумма
-            //         currency: 'KZT', //валюта
-            //         accountId: this.form.email, //идентификатор плательщика (необязательно)
-            //         invoiceId: this.order.id, //номер заказа  (необязательно)
-            //         skin: "mini", //дизайн виджета (необязательно)
-            //         autoClose: 3,
-            //         data: {
-            //             hash: this.order.hash
-            //         }
-            //     }, {
-            //     onSuccess: function (options) { // success
-            //         //действие при успешной оплате
-            //         console.log('success')
-
-            //         axios
-            //             .get(`/admin/order/${this.order.id}/ticket/send`)
-            //             .then(res => {
-            //                 console.log("success send mail");
-            //             });
-            //         setTimeout(() => {
-            //             window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
-            //         }, 500);
-            //     },
-            //     onFail: function (reason, options) { // fail
-            //         //действие при неуспешной оплате
-            //         console.log('cancel')
-            //         axios
-            //             .delete(`/api/order/${this.order.id}/${this.order.hash}`)
-            //             .then(res => {
-            //                 console.log("cancel send to back");
-            //             });
-            //     },
-            //     onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
-            //         //например вызов вашей аналитики Facebook Pixel
-            //     }
-            // }
-            // )
-            var widget = new cp.CloudPayments({ language: "kk" });
-            widget.charge(
+            widget.pay('charge',
                 {
                     // options
-                    publicId: "pk_3e80657de67d651fc26d5c23b4bc7", // id из личного кабинета
+                    publicId: "test_api_00000000000000000000002", // id из личного кабинета
                     description:
                         "Оплата за " +
                         this.timetable.event.title.ru +
@@ -328,33 +283,69 @@ export default {
                         hash: this.order.hash
                     }
                 },
-                function(options) {
-                    // success
-                    window.noty(
-                        "Спасибо!",
-                        "Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email."
-                    );
-                    axios
-                        .get(`/admin/order/${this.order.id}/ticket/send`)
-                        .then(res => {
-                            console.log("success");
-                        });
-                    setTimeout(() => {
-                        window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
-                    }, 500);
-                },
-                function(reason, options) {
-                    // fail
-                    axios
-                        .delete(`/api/order/${this.order.id}/${this.order.hash}`)
-                        .then(res => {
-                            console.log("cancel send to back");
-                        });
-                    console.log(reason);
-                    console.log(options);
-                    window.noty("Оплата не прошла", "error");
-                    console.log('cancel')
+                {
+                    onSuccess: function (options) { // success
+                        console.log('success pay');
+                        window.noty(
+                            "Спасибо!",
+                            "Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email."
+                        );
+                        axios
+                            .get(`/admin/order/${this.order.id}/ticket/send`)
+                            .then(res => {
+                                console.log("success");
+                            });
+                        setTimeout(() => {
+                            window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
+                        }, 500);
+                        //действие при успешной оплате
+                    }.bind(this),
+                    onFail: function (reason, options) { // fail
+                        console.log('fail pay teatr');
+                        console.log(reason)
+                        console.log(options)
+                        this.cancelOrder();
+                        window.noty("Оплата не прошла", "error");
+                        // axios
+                        //     .delete(`/api/order/${this.order.id}/${this.order.hash}`)
+                        //     .then(res => {
+                        //         console.log("cancel order");
+                        //         console.log(res)
+                        //     });
+                        //действие при неуспешной оплате
+                    }.bind(this),
+                    onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
+                        console.log('complete pay');
+                        //например вызов вашей аналитики
+                    }
                 }
+                // function (options) {
+                //     // success
+                //     console.log('success send')
+                //     window.noty(
+                //         "Спасибо!",
+                //         "Ваша оплата прошла успешно - билеты будут отправлены Вам на указанный email."
+                //     );
+                //     axios
+                //         .get(`/admin/order/${this.order.id}/ticket/send`)
+                //         .then(res => {
+                //             console.log("success");
+                //         });
+                //     setTimeout(() => {
+                //         window.location = `${window.location.origin}/order/${order.id}/${order.hash}/pdf`;
+                //     }, 500);
+                // },
+                // function (reason, options) {
+                //     // fail
+                //     console.log(reason);
+                //     console.log(options);
+                //     window.noty("Оплата не прошла", "error");
+                //     axios
+                //         .delete(`/api/order/${this.order.id}/${this.order.hash}`)
+                //         .then(res => {
+                //             this.$router.push("/");
+                //         });
+                // }
             );
         }
     },

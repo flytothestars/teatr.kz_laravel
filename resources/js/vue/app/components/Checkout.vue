@@ -242,7 +242,7 @@ export default {
                 .delete(`/api/order/${this.order.id}/${this.order.hash}`)
                 .then(res => {
                     console.log(res)
-                    this.$router.push("/");
+                    // this.$router.push("/");
                 });
         },
         countdown() {
